@@ -1,7 +1,6 @@
 import pygame
 import settings
-import player_animation
-
+# from utils import PlayerAnimation 
 
 class Player:
     """

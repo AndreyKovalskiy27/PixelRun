@@ -3,8 +3,8 @@
 
 import pygame
 import settings
-import player
-import background
+from player import Player
+from utils import Background
 
 
 def init():
@@ -22,8 +22,8 @@ def init():
 def mainloop(screen):
     """Main loop of the game"""
     # Game objects
-    player_object = player.Player((0, settings.PLAYER_BASE_Y_POSITION))
-    background_object = background.Background()
+    player_object = Player((0, settings.PLAYER_BASE_Y_POSITION))
+    background_object = Background()
 
     clock = pygame.time.Clock()
 
