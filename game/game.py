@@ -3,6 +3,7 @@
 
 import pygame
 import settings
+from main_menu import draw_main_menu
 from player import Player
 from utils import Background
 
@@ -10,6 +11,7 @@ from utils import Background
 def init():
     """Start game"""
     pygame.init()
+    pygame.mixer.init()
 
     screen = pygame.display.set_mode(settings.WINDOW_SIZE)
     pygame.display.set_caption("Pixel run")
@@ -25,16 +27,31 @@ def mainloop(screen):
     player_object = Player()
     background_object = Background()
 
+    # Others
+    game_type = "mainmenu"
     clock = pygame.time.Clock()
+
+    # Music
+    pygame.mixer.music.load(settings.BACKGROUND_MUSIC_PATH)
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(settings.BACKGROUND_MUSIC_VOLUME)
 
     while True:
         clock.tick(settings.TICK_RATE)
         pygame.display.update()
-        screen.fill((0, 0, 0))
+        screen.fill(settings.BACKGROUND_COLOR)
 
-        # Drawing game objects
-        background_object.draw(screen)
-        player_object.draw(screen)
+        if game_type == "game":
+            # Drawing game objects
+            background_object.draw(screen)
+            player_object.draw(screen)
+
+            # Moving objects
+            background_object.move()
+            player_object.keyboard_handler()
+
+        else:
+            draw_main_menu(screen)
 
         for event in pygame.event.get():
             # Quit
@@ -42,8 +59,9 @@ def mainloop(screen):
                 pygame.quit()
                 exit(0)
 
-        background_object.move()
-        player_object.keyboard_handler()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    game_type = "game" if game_type == "mainmenu" else "mainmenu"
 
 def main():
     """Main func. Starts the game"""
