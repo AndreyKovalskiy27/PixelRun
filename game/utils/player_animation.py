@@ -18,9 +18,12 @@ class PlayerAnimation:
         self.__animation_delay = settings.PLAYER_ANIMATION_DELAY
 
         # Loading sprites
-        self.__standing_sprite = pygame.image.load(settings.PLAYER_STANDING_SPIRTE_PATH)
-        self.__running_sprites = [pygame.image.load(settings.PLAYER_RUNNING_SPRITE_PATH),
-                                pygame.image.load(settings.PLAYER_RUNNING2_SPTIRE_PATH)]
+        player_size = settings.PLAYER_SIZE
+        self.__standing_sprite = pygame.transform.scale(
+                                pygame.image.load(settings.PLAYER_STANDING_SPIRTE_PATH), player_size)
+        self.__running_sprites = [pygame.transform.scale(pygame.image.load(settings.PLAYER_RUNNING_SPRITE_PATH), player_size),
+                                pygame.transform.scale(pygame.image.load(settings.PLAYER_RUNNING2_SPTIRE_PATH), player_size)
+                                ]
 
     def change_direction(self, direction):
         """Change player's direction"""

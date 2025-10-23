@@ -2,7 +2,7 @@
 
 
 # General
-WINDOW_SIZE = (1500, 800)
+WINDOW_SIZE = (1800, 800)
 TICK_RATE = 60 # 0 for the max tick rate
 ICON_IMAGE_PATH = "images/icon.jpg"
 
@@ -11,9 +11,10 @@ BACKGROUND_SPEED = 1
 BACKGROUND_IMAGE_PATH = "images/background.jpg"
 
 # PLayer
+PLAYER_SIZE = (126, 140)
 PLAYER_SPEED = 10
 PLAYER_BASE_POSITION = (0, 300)
-PLAYER_GROUND_LIMIT = 430
+PLAYER_GROUND_LIMIT = 500
 
 # Player physics
 PLAYER_GRAVITY = 1
