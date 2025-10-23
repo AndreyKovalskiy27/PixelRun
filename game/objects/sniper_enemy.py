@@ -55,6 +55,8 @@ class SniperEnemy(Object):
         # Updating bullets
         for bullet in self.__bullets:
             bullet.move_left(settings.BULLET_SPEED)
+            if bullet.x + bullet.surface.get_width() < 0:
+                self.__bullets.remove(bullet)
 
         # Moving sniper enemy
         if self.__moving_direction == "up":
