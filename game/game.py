@@ -6,6 +6,7 @@ import settings
 from main_menu import draw_main_menu
 from player import Player
 from utils import Background
+from enemy import Enemy
 
 
 def init():
@@ -26,6 +27,7 @@ def mainloop(screen):
     # Game objects
     player_object = Player()
     background_object = Background()
+    enemy = Enemy((1000, settings.PLAYER_BASE_POSITION[1]))
 
     # Others
     game_type = "mainmenu"
@@ -45,10 +47,15 @@ def mainloop(screen):
             # Drawing game objects
             background_object.draw(screen)
             player_object.draw(screen)
+            enemy.draw(screen)
 
             # Moving objects
             background_object.move()
             player_object.keyboard_handler()
+            enemy.move()
+
+            # Cheching enemy's collision with the player
+            # To be added
 
         else:
             draw_main_menu(screen)
