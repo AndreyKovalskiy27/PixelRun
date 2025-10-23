@@ -73,7 +73,7 @@ class Player(Object):
         self._y += self.__velocity_y
 
         # Limit Y position (ground level from settings)
-        ground_level = settings.PLAYER_GROUND_LIMIT
+        ground_level = settings.GROUND_LIMIT
 
         # Prevent player from falling below the base level
         if self._y >= ground_level:

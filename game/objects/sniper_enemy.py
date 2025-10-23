@@ -14,6 +14,8 @@ class SniperEnemy(Object):
         self._surface = pygame.Surface(settings.SNIPER_ENEMY_SIZE)
         self._surface.fill(settings.SNIPER_ENEMY_COLOR)
 
+        self.__moving_direction = "up"
+
         # Bullets
         self.__last_update = 0
         self.__bullet_delay = settings.BULLET_DELAY
@@ -55,3 +57,14 @@ class SniperEnemy(Object):
             bullet.move_left(settings.BULLET_SPEED)
 
         # Moving sniper enemy
+        if self.__moving_direction == "up":
+            if self._y > 0:
+                self.move_up(settings.SNIPER_ENEMY_MOVING_SPEED, True)
+            else:
+                self.__moving_direction = "down"
+
+        elif self.__moving_direction == "down":
+            if self._y < settings.GROUND_LIMIT:
+                self.move_down(settings.SNIPER_ENEMY_MOVING_SPEED, True)
+            else:
+                self.__moving_direction = "up"

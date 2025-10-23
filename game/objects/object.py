@@ -56,6 +56,22 @@ class Object:
         else:
             self._x -= speed
 
+    def move_up(self, speed, check_borders=False):
+        """Move object up"""
+        if check_borders:
+            if self._y > 0:
+                self._y -= speed
+        else:
+            self._y -= speed
+
+    def move_down(self, speed, check_borders=False):
+        """Move object down"""
+        if check_borders:
+            if self._y < settings.GROUND_LIMIT:
+                self._y += speed
+
+        else:
+            self._y += speed
 
     def check_collision(self, surface):
         """Check objects collision with another object"""
