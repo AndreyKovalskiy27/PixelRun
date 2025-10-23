@@ -13,7 +13,7 @@ def draw_main_menu(screen):
     screen.blit(text1, (x, 0))
 
     font = pygame.font.Font(settings.MAIN_MENU_FONT_PATH, 50)
-    text2 = font.render("Press Enter or click here to play", True, (255, 255, 255))
+    text2 = font.render("Press Enter to play", True, (255, 255, 255))
     x = settings.WINDOW_SIZE[0] / 2 - text2.get_width() / 2
     screen.blit(text2, (x, 500))
 

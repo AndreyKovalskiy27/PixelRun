@@ -3,7 +3,8 @@
 
 import pygame
 import settings
-from utils import PlayerAnimation, Object
+from .object import Object
+from utils import PlayerAnimation
 
 
 class Player(Object):
@@ -28,7 +29,6 @@ class Player(Object):
 
     def draw(self, screen):
         """Draw the player"""
-        self.apply_gravity()
         screen.blit(
             self.__animation.current_sprite,
             (self._x, self._y)

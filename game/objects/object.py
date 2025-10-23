@@ -1,4 +1,4 @@
-"""Base class for all the objects in the game (Player, enemy, background)"""
+"""Base class for all the objects in the game (Player, enemies)"""
 
 
 import pygame

@@ -4,9 +4,9 @@
 import pygame
 import settings
 from utils import draw_main_menu
-import enemys
-from player import Player
+from objects import Player
 from utils import Background
+from objects import SniperEnemy
 
 
 def init():
@@ -27,15 +27,15 @@ def create_game_objects():
     # Game objects
     player_object = Player()
     background_object = Background()
-    enemy = enemys.TriangleEnemy((1000, settings.PLAYER_BASE_POSITION[1]))
+    sniper_enemy = SniperEnemy((1500, settings.PLAYER_BASE_POSITION[1]))
 
     # Others
     game_type = "mainmenu"
-    return player_object, background_object, enemy, game_type
+    return player_object, background_object, sniper_enemy, game_type
 
 def mainloop(screen):
     """Main loop of the game"""
-    player_object, background_object, enemy, game_type = create_game_objects()
+    player_object, background_object, sniper_enemy, game_type = create_game_objects()
     clock = pygame.time.Clock()
 
     # Music
@@ -49,20 +49,25 @@ def mainloop(screen):
         screen.fill(settings.BACKGROUND_COLOR)
 
         if game_type == "game":
-            # Drawing game objects
-            background_object.draw(screen)
-            player_object.draw(screen)
-            enemy.draw(screen)
-
             # Moving objects
             player_object.keyboard_handler()
             background_object.move()
             player_object.move_with_background()
-            enemy.move_with_background()
+            sniper_enemy.move_with_background()
+            player_object.apply_gravity()
+
+            sniper_enemy.shot()
+            sniper_enemy.update()
+
+            # Drawing game objects
+            background_object.draw(screen)
+            player_object.draw(screen)
+            sniper_enemy.draw(screen)
 
             # Cheching enemy's collision with the player
-            if player_object.check_collision(enemy):
-                player_object, background_object, enemy, game_type = create_game_objects()
+            if sniper_enemy.check_collision(player_object):
+                player_object, background_object, sniper_enemy, game_type = create_game_objects()
+
 
         else:
             draw_main_menu(screen)
@@ -81,11 +86,11 @@ def mainloop(screen):
                 # Restart
                 elif event.key == pygame.K_r:
                     if game_type == "game":
-                        player_object, background_object, enemy, game_type = create_game_objects()
+                        player_object, background_object, sniper_enemy, game_type = create_game_objects()
                         game_type = "game"
 
                     else:
-                        game_type = "mainmenu"
+                        None
 
 def main():
     """Main func. Starts the game"""

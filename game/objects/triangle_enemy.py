@@ -2,15 +2,18 @@
 
 
 import pygame
-from utils import Object
+import settings
+from .object import Object
 
 
 class TriangleEnemy(Object):
     """Triangle enemy"""
-    def __init__(self, position, width=100, height=80, color=(255, 0, 0)):
+    def __init__(self, position):
         super().__init__(position)
 
-        # Создаем поверхность для треугольника
+        width, height = settings.TRIANGLE_ENEMY_SIZE
+        color = settings.TRIANGLE_ENEMY_COLOR
+
         self._surface = pygame.Surface((width, height), pygame.SRCALPHA)
         self._surface = self._surface.convert_alpha()
 
