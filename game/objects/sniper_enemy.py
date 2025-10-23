@@ -50,6 +50,10 @@ class SniperEnemy(Object):
             self.__bullets.append(bullet)
             self.__last_update = current_tick
 
+    @property
+    def bullets_amount(self):
+        return len(self.__bullets)
+
     def update(self):
         """Update sniper enemy"""
         # Updating bullets

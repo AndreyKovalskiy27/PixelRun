@@ -6,10 +6,11 @@ WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
 BACKGROUND_MUSIC_PATH = "assets/sounds/BackgroundMusic.mp3"
 BACKGROUND_MUSIC_VOLUME = 0.5
-TICK_RATE = 60 # 0 for the max tick rate
+FPS = 60 # 0 for the max FPS
 ICON_IMAGE_PATH = "assets/images/icon.jpg"
-MAIN_MENU_FONT_PATH = "assets/fonts/GameFont.ttf"
+FONT_PATH = "assets/fonts/GameFont.ttf"
 GROUND_LIMIT = 560
+TEXT_COLOR = (255, 255, 255)
 
 # Background
 BACKGROUND_SPEED = 1
@@ -42,4 +43,4 @@ SNIPER_ENEMY_MOVING_SPEED = 10
 BULLET_SIZE = (50, 10)
 BULLET_COLOR = (150, 0, 0)
 BULLET_SPEED = 10
-BULLET_DELAY = 500
+BULLET_DELAY = 1000

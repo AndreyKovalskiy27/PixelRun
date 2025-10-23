@@ -3,7 +3,7 @@
 
 import pygame
 import settings
-from utils import draw_main_menu
+from utils import draw_main_menu, draw_tab_menu
 from objects import Player
 from utils import Background
 from objects import SniperEnemy
@@ -13,6 +13,7 @@ def init():
     """Start game"""
     pygame.init()
     pygame.mixer.init()
+    pygame.font.init()
 
     screen = pygame.display.set_mode(settings.WINDOW_SIZE)
     pygame.display.set_caption("Pixel run")
@@ -36,6 +37,7 @@ def create_game_objects():
 def mainloop(screen):
     """Main loop of the game"""
     player_object, background_object, sniper_enemy, game_type = create_game_objects()
+    tab_menu_on = False
     clock = pygame.time.Clock()
 
     # Music
@@ -44,7 +46,7 @@ def mainloop(screen):
     pygame.mixer.music.set_volume(settings.BACKGROUND_MUSIC_VOLUME)
 
     while True:
-        clock.tick(settings.TICK_RATE)
+        clock.tick(settings.FPS)
         pygame.display.update()
         screen.fill(settings.BACKGROUND_COLOR)
 
@@ -68,6 +70,8 @@ def mainloop(screen):
             if sniper_enemy.check_collision(player_object):
                 player_object, background_object, sniper_enemy, game_type = create_game_objects()
 
+            if tab_menu_on:
+                draw_tab_menu(screen, clock.get_fps())
 
         else:
             draw_main_menu(screen)
@@ -91,6 +95,10 @@ def mainloop(screen):
 
                     else:
                         None
+
+                # Tab menu
+                elif event.key == pygame.K_TAB:
+                    tab_menu_on = False if tab_menu_on else True
 
 def main():
     """Main func. Starts the game"""

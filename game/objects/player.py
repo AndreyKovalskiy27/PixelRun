@@ -35,6 +35,22 @@ class Player(Object):
         )
 
     @property
+    def gravity(self):
+        return self.__gravity
+
+    @property
+    def jump_strenght(self):
+        return self.__jump_strength
+
+    @property
+    def on_ground(self):
+        return self.__on_ground
+
+    @property
+    def velocity_y(self):
+        return self.__velocity_y
+
+    @property
     def surface(self):
         return self.__animation.current_sprite
 
