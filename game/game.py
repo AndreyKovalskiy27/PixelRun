@@ -31,6 +31,9 @@ def mainloop(screen):
         clock.tick(settings.TICK_RATE)
         pygame.display.update()
         screen.fill((0, 0, 0))
+        player_object.apply_gravity()
+        player_object.draw(screen)
+
 
         # Drawing game objects
         background_object.draw(screen)
