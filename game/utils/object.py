@@ -19,9 +19,9 @@ class Object:
             (self._x, self._y)
         )
 
-    def move(self):
+    def move_with_background(self, check_borders = False):
         """Move the object with the background"""
-        self._x -= settings.BACKGROUND_SPEED
+        self.move_left(settings.BACKGROUND_SPEED, check_borders)
 
     @property
     def x(self):
@@ -39,21 +39,23 @@ class Object:
     def surface(self):
         return self._surface
 
-    def move_right(self, speed):
+    def move_right(self, speed, check_borders = False):
         """Move object to the right"""
-        self._x += speed
+        if check_borders:
+            if self._x + self.surface.get_width() < settings.WINDOW_SIZE[0]:
+                self._x += speed
 
-    def move_left(self, speed):
+        else:
+            self._x += speed
+
+    def move_left(self, speed, check_borders=False):
         """Move object to the left"""
-        self._x -= speed
+        if check_borders:
+            if self._x > 0:
+                self._x -= speed
+        else:
+            self._x -= speed
 
-    def move_down(self, speed):
-        """Move object to the right"""
-        self._y += speed
-
-    def move_up(self, speed):
-        """Move object to the right"""
-        self.y -= speed
 
     def check_collision(self, surface):
         """Check objects collision with another object"""

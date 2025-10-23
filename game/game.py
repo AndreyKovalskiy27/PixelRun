@@ -55,9 +55,10 @@ def mainloop(screen):
             enemy.draw(screen)
 
             # Moving objects
-            background_object.move()
             player_object.keyboard_handler()
-            enemy.move()
+            background_object.move()
+            player_object.move_with_background()
+            enemy.move_with_background()
 
             # Cheching enemy's collision with the player
             if player_object.check_collision(enemy):
@@ -73,8 +74,18 @@ def mainloop(screen):
                 exit(0)
 
             if event.type == pygame.KEYDOWN:
+                # Changing game modes
                 if event.key == pygame.K_RETURN:
                     game_type = "game" if game_type == "mainmenu" else "mainmenu"
+
+                # Restart
+                elif event.key == pygame.K_r:
+                    if game_type == "game":
+                        player_object, background_object, enemy, game_type = create_game_objects()
+                        game_type = "game"
+
+                    else:
+                        game_type = "mainmenu"
 
 def main():
     """Main func. Starts the game"""

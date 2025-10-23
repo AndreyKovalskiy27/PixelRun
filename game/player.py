@@ -22,6 +22,10 @@ class Player(Object):
         # Player animation
         self.__animation = PlayerAnimation()
 
+    def move_with_background(self):
+        """Move player with the background"""
+        super().move_left(settings.BACKGROUND_SPEED, True)
+
     def draw(self, screen):
         """Draw the player"""
         self.apply_gravity()
@@ -29,6 +33,10 @@ class Player(Object):
             self.__animation.current_sprite,
             (self._x, self._y)
         )
+
+    @property
+    def surface(self):
+        return self.__animation.current_sprite
 
     def keyboard_handler(self):
         """Handle keyboard input for player movement"""
@@ -38,14 +46,13 @@ class Player(Object):
         # Move left
         if pressed_keys[pygame.K_a] or pressed_keys[pygame.K_LEFT]:
             if self._x > 0:
-                self._x -= settings.PLAYER_SPEED
+                self.move_left(settings.PLAYER_SPEED, True)
                 self.__animation.change_direction("left")
                 moving = True
 
         # Move right
         if pressed_keys[pygame.K_d] or pressed_keys[pygame.K_RIGHT]:
-            if self._x + self.__animation.current_sprite.get_width() < settings.WINDOW_SIZE[0]:
-                self._x += settings.PLAYER_SPEED
+                self.move_right(settings.PLAYER_SPEED, True)
                 self.__animation.change_direction("right")
                 moving = True
 
@@ -57,6 +64,8 @@ class Player(Object):
         # Standing if not moving
         if not moving:
             self.__animation.change_direction("standing")
+
+        self._surface = self.__animation.current_sprite
 
     def apply_gravity(self):
         """Apply gravity to the player"""
