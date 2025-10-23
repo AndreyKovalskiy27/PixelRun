@@ -4,6 +4,7 @@
 import pygame
 import settings
 import player
+import background
 
 
 def init():
@@ -13,27 +14,35 @@ def init():
     screen = pygame.display.set_mode(settings.WINDOW_SIZE)
     pygame.display.set_caption("Pixel run")
 
-    icon = pygame.image.load("assets/images/icon.jpg")
+    icon = pygame.image.load(settings.ICON_IMAGE_PATH)
     pygame.display.set_icon(icon)  # For some reason icon doesn't work on Windows
 
     return screen
 
 def mainloop(screen):
     """Main loop of the game"""
-    player_object = player.Player((0, 600))
-    running = True
+    # Game objects
+    player_object = player.Player((0, 490))
+    background_object = background.Background()
 
-    while running:
+    clock = pygame.time.Clock()
+
+    while True:
+        clock.tick(settings.TICK_RATE)
         pygame.display.update()
         screen.fill((0, 0, 0))
+
+        # Drawing game objects
+        background_object.draw(screen)
         player_object.draw(screen)
 
         for event in pygame.event.get():
             # Quit
             if event.type == pygame.QUIT:
-                running = False
                 pygame.quit()
+                exit(0)
 
+        background_object.move()
         player_object.keyboard_handler()
 
 def main():

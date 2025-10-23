@@ -1,5 +1,0 @@
-"""Obstacle"""
-
-
-class Obstacle:
-    """Obstacle"""
