@@ -9,13 +9,13 @@ class Object:
     """Base Object"""
     def __init__(self, position):
         self._x, self._y = position
-        self.__surface = pygame.Surface((50, 50))
-        self.__surface.fill((255, 0, 0))
+        self._surface = pygame.Surface((50, 50))
+        self._surface.fill((255, 0, 0))
 
     def draw(self, screen):
         """Draw object on the screen"""
         screen.blit(
-            self.__surface,
+            self._surface,
             (self._x, self._y)
         )
 
@@ -37,7 +37,23 @@ class Object:
 
     @property
     def surface(self):
-        return self.__surface
+        return self._surface
+
+    def move_right(self, speed):
+        """Move object to the right"""
+        self._x += speed
+
+    def move_left(self, speed):
+        """Move object to the left"""
+        self._x -= speed
+
+    def move_down(self, speed):
+        """Move object to the right"""
+        self._y += speed
+
+    def move_up(self, speed):
+        """Move object to the right"""
+        self.y -= speed
 
     def check_collision(self, surface):
         """Check objects collision with another object"""

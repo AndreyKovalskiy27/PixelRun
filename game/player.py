@@ -3,8 +3,7 @@
 
 import pygame
 import settings
-from utils import PlayerAnimation 
-from object import Object
+from utils import PlayerAnimation, Object
 
 
 class Player(Object):

@@ -2,7 +2,7 @@
 
 
 import pygame
-from object import Object
+from utils import Object
 
 
 class TriangleEnemy(Object):
@@ -20,7 +20,3 @@ class TriangleEnemy(Object):
             (width, height)
         ]
         pygame.draw.polygon(self._surface, color, points)
-
-    def draw(self, screen):
-        """Рисует треугольник на экране"""
-        screen.blit(self._surface, (self.x, self.y))

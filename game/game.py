@@ -3,7 +3,7 @@
 
 import pygame
 import settings
-from main_menu import draw_main_menu
+from utils import draw_main_menu
 import enemys
 from player import Player
 from utils import Background
