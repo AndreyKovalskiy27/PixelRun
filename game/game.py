@@ -22,7 +22,7 @@ def init():
 def mainloop(screen):
     """Main loop of the game"""
     # Game objects
-    player_object = Player((0, settings.PLAYER_BASE_Y_POSITION))
+    player_object = Player()
     background_object = Background()
 
     clock = pygame.time.Clock()
@@ -31,9 +31,6 @@ def mainloop(screen):
         clock.tick(settings.TICK_RATE)
         pygame.display.update()
         screen.fill((0, 0, 0))
-        player_object.apply_gravity()
-        player_object.draw(screen)
-
 
         # Drawing game objects
         background_object.draw(screen)

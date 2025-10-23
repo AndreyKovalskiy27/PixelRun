@@ -1,64 +1,80 @@
 import pygame
 import settings
-# from utils import PlayerAnimation 
+from utils import PlayerAnimation 
 
 class Player:
     """
     Player class to draw player and
     move player with keyboard.
     """
-    def __init__(self, start_coords=(0, 0)):
-        self.x, self.y = start_coords
-        self.speed = settings.PLAYER_SPEED
+    def __init__(self):
+        self.__x, self.__y = settings.PLAYER_BASE_POSITION
+        self.__speed = settings.PLAYER_SPEED
 
         # Physics for jumping
-        self.gravity = 1        # Gravity strength
-        self.jump_strength = 15 # Initial jump velocity
-        self.velocity_y = 0     # Vertical speed
-        self.on_ground = True   # Is the player on the ground?
+        self.__gravity = settings.PLAYER_GRAVITY # Gravity strength
+        self.__jump_strength = settings.PLAYER_JUMP_STRENGHT # Initial jump velocity
+        self.__velocity_y = 0     # Vertical speed
+        self.__on_ground = True   # Is the player on the ground?
 
-        # Player surface (temporary placeholder)
-        self.surface = pygame.Surface((50, 50))
-        self.surface.fill((0, 0, 0))
+        # Player animation
+        self.__animation = PlayerAnimation()
+
+    @property
+    def x(self):
+        return self.__x
+
+    @property
+    def y(self):
+        return self.__y
 
     def draw(self, screen):
         """Draw the player"""
+        self.apply_gravity()
+
         screen.blit(
-            self.surface,
-            (self.x, self.y)
+            self.__animation.current_sprite,
+            (self.__x, self.__y)
         )
 
     def keyboard_handler(self):
         """Handle keyboard input for player movement"""
         pressed_keys = pygame.key.get_pressed()
+        moving = False
 
         # Move left
         if pressed_keys[pygame.K_a] or pressed_keys[pygame.K_LEFT]:
-            if self.x > 0:
-                self.x -= self.speed
-                # self.animation.change_direction("left")
+            if self.__x > 0:
+                self.__x -= self.__speed
+                self.__animation.change_direction("left")
+                moving = True
 
         # Move right
-        elif pressed_keys[pygame.K_d] or pressed_keys[pygame.K_RIGHT]:
-            if self.x + self.surface.get_width() < settings.WINDOW_SIZE[0]:
-                self.x += self.speed
-                # self.animation.change_direction("right")
+        if pressed_keys[pygame.K_d] or pressed_keys[pygame.K_RIGHT]:
+            if self.__x + self.__animation.current_sprite.get_width() < settings.WINDOW_SIZE[0]:
+                self.__x += self.__speed
+                self.__animation.change_direction("right")
+                moving = True
 
         # Jump
-        if (pressed_keys[pygame.K_w] or pressed_keys[pygame.K_UP] or pressed_keys[pygame.K_SPACE]) and self.on_ground:
-            self.velocity_y = -self.jump_strength  # Go up
-            self.on_ground = False
+        if (pressed_keys[pygame.K_w] or pressed_keys[pygame.K_UP] or pressed_keys[pygame.K_SPACE]) and self.__on_ground:
+            self.__velocity_y = -self.__jump_strength  # Go up
+            self.__on_ground = False
+
+        # Standing if not moving
+        if not moving:
+            self.__animation.change_direction("standing")
 
     def apply_gravity(self):
         """Apply gravity to the player"""
-        self.velocity_y += self.gravity
-        self.y += self.velocity_y
+        self.__velocity_y += self.__gravity
+        self.__y += self.__velocity_y
 
         # Limit Y position (ground level from settings)
-        ground_level = settings.PLAYER_BASE_Y_POSITION
+        ground_level = settings.PLAYER_GROUND_LIMIT
 
         # Prevent player from falling below the base level
-        if self.y >= ground_level:
-            self.y = ground_level
-            self.velocity_y = 0
-            self.on_ground = True
+        if self.__y >= ground_level:
+            self.__y = ground_level
+            self.__velocity_y = 0
+            self.__on_ground = True
