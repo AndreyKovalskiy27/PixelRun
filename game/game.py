@@ -22,7 +22,7 @@ def init():
 def mainloop(screen):
     """Main loop of the game"""
     # Game objects
-    player_object = player.Player((0, 490))
+    player_object = player.Player((0, settings.PLAYER_BASE_Y_POSITION))
     background_object = background.Background()
 
     clock = pygame.time.Clock()
