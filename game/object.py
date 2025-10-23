@@ -38,3 +38,11 @@ class Object:
     @property
     def surface(self):
         return self.__surface
+
+    def check_collision(self, surface):
+        """Check objects collision with another object"""
+        rect_self = self.surface.get_rect(topleft=(self.x, self.y))
+        rect_other = surface.surface.get_rect(topleft=(surface.x, surface.y))
+
+        # Проверяем пересечение
+        return rect_self.colliderect(rect_other)

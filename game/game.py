@@ -4,9 +4,9 @@
 import pygame
 import settings
 from main_menu import draw_main_menu
+import enemys
 from player import Player
 from utils import Background
-from enemy import Enemy
 
 
 def init():
@@ -22,15 +22,20 @@ def init():
 
     return screen
 
-def mainloop(screen):
-    """Main loop of the game"""
+def create_game_objects():
+    """Create game objects"""
     # Game objects
     player_object = Player()
     background_object = Background()
-    enemy = Enemy((1000, settings.PLAYER_BASE_POSITION[1]))
+    enemy = enemys.TriangleEnemy((1000, settings.PLAYER_BASE_POSITION[1]))
 
     # Others
     game_type = "mainmenu"
+    return player_object, background_object, enemy, game_type
+
+def mainloop(screen):
+    """Main loop of the game"""
+    player_object, background_object, enemy, game_type = create_game_objects()
     clock = pygame.time.Clock()
 
     # Music
@@ -55,7 +60,8 @@ def mainloop(screen):
             enemy.move()
 
             # Cheching enemy's collision with the player
-            # To be added
+            if player_object.check_collision(enemy):
+                player_object, background_object, enemy, game_type = create_game_objects()
 
         else:
             draw_main_menu(screen)
