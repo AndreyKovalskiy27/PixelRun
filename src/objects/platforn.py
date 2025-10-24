@@ -17,12 +17,6 @@ class Platform(Object):
     def stop_player(self, player):
         """Prevents the player from moving through the platform"""
         if self.check_collision(player):
-            if player.x + player.surface.get_width() <= self.x:
-                player.x = self.x
-
-            if self.x + self.surface.get_width() <= player.x:
-                player.x = self.x + self.surface.get_width()
-
             if player.y + player.surface.get_height() - player.velocity_y <= self.y:
                 player.y = self.y - player.surface.get_height()
                 player.on_ground = True
@@ -31,3 +25,9 @@ class Platform(Object):
             elif self.y + self.surface.get_height() >= player.y:
                 player.y = self.y + self.surface.get_height()
                 player.velocity_y = 0
+
+            elif player.x + player.surface.get_width() <= self.x:
+                player.x = self.x
+
+            elif self.x + self.surface.get_width() <= player.x:
+                player.x = self.x + self.surface.get_width()
