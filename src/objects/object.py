@@ -51,7 +51,6 @@ class Object:
     def move_down(self, speed, check_borders=False):
         """Move object down"""
         if check_borders:
-            print(self.y + self.surface.get_height(), settings.GROUND_LIMIT)
             if self.y + self.surface.get_height() < settings.GROUND_LIMIT:
                 self.y += speed
 

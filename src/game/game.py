@@ -42,13 +42,13 @@ class Game:
                 # Moving objects
                 self.player_object.keyboard_handler()
                 self.player_object.apply_gravity()
-                self.platform.move_with_background()
-
+                if self.level.update(self.player_object):
+                    create_game_objects(self)
+                    self.game_type = "game"
+                
                 # Drawing game objects
                 self.player_object.draw(self.screen)
-                self.platform.draw(self.screen)
-
-                self.platform.stop_player(self.player_object)
+                self.level.draw(self.screen)
 
             else:
                 self.main_menu.draw_main_menu(self.screen)

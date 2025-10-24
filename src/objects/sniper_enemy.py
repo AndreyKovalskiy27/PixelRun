@@ -50,13 +50,10 @@ class SniperEnemy(Object):
             self.bullets.append(bullet)
             self.last_update = current_tick
 
-    @property
-    def bullets_amount(self):
-        return len(self.bullets)
-
     def update(self):
         """Update sniper enemy"""
         # Updating bullets
+        self.shot()
         for bullet in self.bullets:
             bullet.move_left(settings.BULLET_SPEED)
             if bullet.x + bullet.surface.get_width() < 0:
@@ -64,13 +61,12 @@ class SniperEnemy(Object):
 
         # Moving sniper enemy
         if self.moving_direction == "up":
-            if self._y > 0:
-                self.move_up(settings.SNIPER_ENEMY_MOVING_SPEED, True)
-            else:
+            self.move_up(settings.SNIPER_ENEMY_MOVING_SPEED, True)
+            if self.y <= 0:
                 self.moving_direction = "down"
 
         elif self.moving_direction == "down":
-            if self._y < settings.GROUND_LIMIT:
-                self.move_down(settings.SNIPER_ENEMY_MOVING_SPEED, True)
-            else:
+            self.move_down(settings.SNIPER_ENEMY_MOVING_SPEED, True)
+
+            if self.y + self.surface.get_height() >= settings.GROUND_LIMIT:
                 self.moving_direction = "up"
