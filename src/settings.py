@@ -10,12 +10,11 @@ BASE_FPS = 60 # 0 for the max FPS
 SLOW_DOWN_FPS = 30
 ICON_IMAGE_PATH = "assets/images/icon.jpg"
 FONT_PATH = "assets/fonts/GameFont.ttf"
-GROUND_LIMIT = 560
+GROUND_LIMIT = WINDOW_SIZE[1]
 TEXT_COLOR = (255, 255, 255)
 
 # Background
-BACKGROUND_SPEED = 1
-BACKGROUND_IMAGE_PATH = "assets/images/background.jpg"
+BACKGROUND_SPEED = 3
 
 # PLayer
 PLAYER_SIZE = (63, 70)
@@ -35,7 +34,7 @@ PLAYER_RUNNING2_SPTIRE_PATH = "assets/images/player/player_running2.PNG"
 
 # Enemies
 TRIANGLE_ENEMY_SIZE = (100, 80)
-TRIANGLE_ENEMY_COLOR = (155, 0, 0)
+TRIANGLE_ENEMY_COLOR = (255, 0, 255)
 SNIPER_ENEMY_COLOR = (150, 0, 0)
 SNIPER_ENEMY_SIZE = (200, 50)
 SNIPER_ENEMY_MOVING_SPEED = 10

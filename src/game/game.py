@@ -41,12 +41,10 @@ class Game:
             if self.game_type == "game":
                 # Moving objects
                 self.player_object.keyboard_handler()
-                self.background_object.move()
-                self.player_object.move_with_background()
                 self.player_object.apply_gravity()
+                self.platform.move_with_background()
 
                 # Drawing game objects
-                self.background_object.draw(self.screen)
                 self.player_object.draw(self.screen)
                 self.platform.draw(self.screen)
 
