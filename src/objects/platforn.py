@@ -11,7 +11,7 @@ class Platform(Object):
         super().__init__(position)
 
         # Create the platform surface
-        self.surface = pygame.Surface((200, 50))
+        self.surface = pygame.Surface(settings.PLATFORM_SIZE)
         self.surface.fill(settings.PLATFORM_COLOR)
 
     def stop_player(self, player):
