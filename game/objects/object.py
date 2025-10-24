@@ -8,70 +8,54 @@ import settings
 class Object:
     """Base Object"""
     def __init__(self, position):
-        self._x, self._y = position
-        self._surface = pygame.Surface((50, 50))
-        self._surface.fill((255, 0, 0))
+        self.x, self.y = position
+        self.surface = pygame.Surface((50, 50))
+        self.surface.fill((255, 0, 0))
 
     def draw(self, screen):
         """Draw object on the screen"""
         screen.blit(
-            self._surface,
-            (self._x, self._y)
+            self.surface,
+            (self.x, self.y)
         )
 
     def move_with_background(self, check_borders = False):
         """Move the object with the background"""
         self.move_left(settings.BACKGROUND_SPEED, check_borders)
 
-    @property
-    def x(self):
-        return self._x
-
-    @property
-    def y(self):
-        return self._y
-
-    @property
-    def x(self):
-        return self._x
-
-    @property
-    def surface(self):
-        return self._surface
-
     def move_right(self, speed, check_borders = False):
         """Move object to the right"""
         if check_borders:
-            if self._x + self.surface.get_width() < settings.WINDOW_SIZE[0]:
-                self._x += speed
+            if self.x + self.surface.get_width() < settings.WINDOW_SIZE[0]:
+                self.x += speed
 
         else:
-            self._x += speed
+            self.x += speed
 
     def move_left(self, speed, check_borders=False):
         """Move object to the left"""
         if check_borders:
-            if self._x > 0:
-                self._x -= speed
+            if self.x > 0:
+                self.x -= speed
         else:
-            self._x -= speed
+            self.x -= speed
 
     def move_up(self, speed, check_borders=False):
         """Move object up"""
         if check_borders:
-            if self._y > 0:
-                self._y -= speed
+            if self.y > 0:
+                self.y -= speed
         else:
-            self._y -= speed
+            self.y -= speed
 
     def move_down(self, speed, check_borders=False):
         """Move object down"""
         if check_borders:
-            if self._y < settings.GROUND_LIMIT:
-                self._y += speed
+            if self.y < settings.GROUND_LIMIT:
+                self.y += speed
 
         else:
-            self._y += speed
+            self.y += speed
 
     def check_collision(self, surface):
         """Check objects collision with another object"""

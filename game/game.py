@@ -6,7 +6,7 @@ import settings
 from utils import draw_main_menu
 from objects import Player
 from utils import Background
-from objects import SniperEnemy
+from objects import Platform
 
 
 def init():
@@ -28,15 +28,15 @@ def create_game_objects():
     # Game objects
     player_object = Player()
     background_object = Background()
-    sniper_enemy = SniperEnemy((1500, settings.PLAYER_BASE_POSITION[1]))
+    platform = Platform((1000, 500))
 
     # Others
     game_type = "mainmenu"
-    return player_object, background_object, sniper_enemy, game_type
+    return player_object, background_object, platform, game_type
 
 def mainloop(screen):
     """Main loop of the game"""
-    player_object, background_object, sniper_enemy, game_type = create_game_objects()
+    player_object, background_object, platform, game_type = create_game_objects()
     tab_menu_on = False
     fps = settings.BASE_FPS
     clock = pygame.time.Clock()
@@ -56,20 +56,14 @@ def mainloop(screen):
             player_object.keyboard_handler()
             background_object.move()
             player_object.move_with_background()
-            sniper_enemy.move_with_background()
             player_object.apply_gravity()
-
-            sniper_enemy.shot()
-            sniper_enemy.update()
 
             # Drawing game objects
             background_object.draw(screen)
             player_object.draw(screen)
-            sniper_enemy.draw(screen)
+            platform.draw(screen)
 
-            # Cheching enemy's collision with the player
-            if sniper_enemy.check_collision(player_object):
-                player_object, background_object, sniper_enemy, game_type = create_game_objects()
+            platform.stop_player(player_object)
 
         else:
             draw_main_menu(screen)
@@ -88,15 +82,18 @@ def mainloop(screen):
                 # Restart
                 elif event.key == pygame.K_r:
                     if game_type == "game":
-                        player_object, background_object, sniper_enemy, game_type = create_game_objects()
+                        player_object, background_object, platform, game_type = create_game_objects()
                         game_type = "game"
 
                     else:
-                        None
+                        pass
 
                 # Slow down
                 elif event.key == pygame.K_t:
-                    fps = settings.SLOW_DOWN_FPS if fps == settings.BASE_FPS else settings.BASE_FPS
+                    if game_type == "game":
+                        fps = settings.SLOW_DOWN_FPS if fps == settings.BASE_FPS else settings.BASE_FPS
+
+
 def main():
     """Main func. Starts the game"""
     screen = init()
