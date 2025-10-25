@@ -42,13 +42,15 @@ class SniperEnemy(Object):
 
     def shot(self):
         """Shot a bullet"""
-        current_tick = pygame.time.get_ticks()
-        if current_tick - self.last_update > self.bullet_delay:
-            bullet = Object((self.x, self.y))
-            bullet.surface = pygame.surface.Surface(settings.BULLET_SIZE)
-            bullet.surface.fill(settings.BULLET_COLOR)
-            self.bullets.append(bullet)
-            self.last_update = current_tick
+        # Checking if sniper enemy is on the screen
+        if self.x <= settings.WINDOW_SIZE[0]:
+            current_tick = pygame.time.get_ticks()
+            if current_tick - self.last_update > self.bullet_delay:
+                bullet = Object((self.x, self.y))
+                bullet.surface = pygame.surface.Surface(settings.BULLET_SIZE)
+                bullet.surface.fill(settings.BULLET_COLOR)
+                self.bullets.append(bullet)
+                self.last_update = current_tick
 
     def update(self):
         """Update sniper enemy"""

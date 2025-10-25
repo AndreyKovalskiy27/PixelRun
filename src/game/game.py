@@ -42,13 +42,13 @@ class Game:
                 # Moving objects
                 self.player_object.keyboard_handler()
                 self.player_object.apply_gravity()
-                if self.level.update(self.player_object):
+                if self.levels_manager.update(self.player_object):
                     create_game_objects(self)
                     self.game_type = "game"
                 
                 # Drawing game objects
                 self.player_object.draw(self.screen)
-                self.level.draw(self.screen)
+                self.levels_manager.draw(self.screen)
 
             else:
                 self.main_menu.draw_main_menu(self.screen)

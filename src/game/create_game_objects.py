@@ -2,14 +2,14 @@
 
 
 from objects import Player
-from utils import Level_2
+from utils import LevelsManager
 
 
 def create_game_objects(self):
     """Create game objects"""
     # Game objects
     self.player_object = Player()
-    self.level = Level_2()
+    self.levels_manager = LevelsManager()
 
     # Others
     self.game_type = "mainmenu"
