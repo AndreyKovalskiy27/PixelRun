@@ -38,7 +38,7 @@ class SniperEnemy(Object):
                 return True
 
         if not was_bulet_collision:
-            return super().check_collision(surface)
+            return False
 
     def shot(self):
         """Shot a bullet"""

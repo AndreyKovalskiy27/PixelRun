@@ -9,8 +9,8 @@ class MainMenu:
     def __init__(self):
         """Create all menu objects"""
         self.text1 = Text((550, 0), "PIXEL RUN", 100, True)
-        self.press_enter_button = Button((650, 196), "Press enter to play")
-        self.button_shop = Button((650, 400), "SHOP")
+        self.press_enter_button = Button((0, 196), "Press enter to play", center_x=True)
+        self.button_shop = Button((0, 400), "SHOP (NEW)", text_size=60, center_x=True)
 
 
     def draw_main_menu(self, screen):

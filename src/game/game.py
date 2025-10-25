@@ -3,9 +3,10 @@
 
 import settings
 import pygame
+from shop import ShopMenu
 from .main_menu import MainMenu
 from .create_game_objects import create_game_objects
-from .event_handler import event_handler
+from ui import Button
 
 
 class Game:
@@ -22,21 +23,52 @@ class Game:
         icon = pygame.image.load(settings.ICON_IMAGE_PATH)
         pygame.display.set_icon(icon)  # For some reason icon doesn't work on Windows
 
+        self.current_music = None
+
+    def play_music(self, path, volume=settings.MUSIC_VOLUME):
+        """Play background music safely"""
+        if self.current_music == path:
+            return
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load(path)
+        pygame.mixer.music.set_volume(volume)
+        pygame.mixer.music.play(-1)
+        self.current_music = path
+
     def mainloop(self):
         """Main loop of the game"""
         create_game_objects(self)
         self.clock = pygame.time.Clock()
         self.main_menu = MainMenu()
-
-        # Music
-        pygame.mixer.music.load(settings.BACKGROUND_MUSIC_PATH)
-        pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(settings.BACKGROUND_MUSIC_VOLUME)
+        self.shop_menu = ShopMenu()
+        self.back_btn = Button((10, 10), "< (Press Enter)", (350, 50))
+        self.restart_btn = Button((400, 10), "Restart (Press R)", (350, 50))
 
         while True:
             self.clock.tick(settings.BASE_FPS)
             pygame.display.update()
             self.screen.fill(settings.BACKGROUND_COLOR)
+
+            event = pygame.event.get()
+
+            for _ in event:
+                # Quit
+                if _.type == pygame.QUIT:
+                    pygame.quit()
+                    exit(0)
+
+                # Keys
+                if _.type == pygame.KEYDOWN:
+                    # Changing game modes
+                    if _.key == pygame.K_RETURN:
+                        if self.game_type != "shop":
+                            self.game_type = "game" if self.game_type == "mainmenu" else "mainmenu"
+
+                    # Restart
+                    elif _.key == pygame.K_r:
+                        if self.game_type == "game":
+                            create_game_objects(self)
+                            self.game_type = "game"
 
             if self.game_type == "game":
                 # Moving objects
@@ -50,10 +82,31 @@ class Game:
                 # Drawing game objects
                 self.player_object.draw(self.screen)
                 self.levels_manager.draw(self.screen)
+                self.back_btn.draw(self.screen)
+                self.back_btn.update()
+                self.restart_btn.draw(self.screen)
+                self.restart_btn.update()
 
-            else:
-                self.main_menu.draw_main_menu(self.screen)
-                if self.main_menu.press_enter_button.is_clicked():
+                if self.back_btn.is_clicked(event):
+                    self.game_type = "mainmenu"
+
+                elif self.restart_btn.is_clicked(event):
+                    create_game_objects(self)
                     self.game_type = "game"
 
-            event_handler(self)
+            elif self.game_type == "shop":
+                self.play_music(settings.SHOP_MUSIC_PATH)
+                self.shop_menu.draw(self.screen)
+
+                if self.shop_menu.button_back.is_clicked(event):
+                    self.game_type = "mainmenu"
+
+            elif self.game_type == "mainmenu":
+                # Music
+                self.play_music(settings.BACKGROUND_MUSIC_PATH)
+                self.main_menu.draw_main_menu(self.screen)
+                if self.main_menu.press_enter_button.is_clicked(event):
+                    self.game_type = "game"
+
+                elif self.main_menu.button_shop.is_clicked(event):
+                    self.game_type = "shop"

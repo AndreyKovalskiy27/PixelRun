@@ -7,7 +7,9 @@ import pygame
 
 class Text:
     """Text"""
-    def __init__(self, position, text, size, center_x = False, color=settings.TEXT_COLOR):
+    def __init__(self, position, text, size,
+                 center_x = False, center_y = False,
+                 color=settings.TEXT_COLOR):
         self.text = text
         self.size = size
         self.color = color
@@ -19,7 +21,10 @@ class Text:
 
         self.x, self.y = position
         if center_x and not self.is_multiple_lined:
-            self.x = settings.WINDOW_SIZE[0] / 2 - self.text_surface.get_width() / 2  # Placing text at the center
+            self.x = settings.WINDOW_SIZE[0] / 2 - self.text_surface.get_width() / 2  # Placing text at the center by x
+
+        if center_y and not self.is_multiple_lined:
+            self.y = settings.WINDOW_SIZE[1] / 2 - self.text_surface.get_height() / 2  # Placing text at the center by y
 
     def draw(self, screen):
         """Draw text on the screen"""

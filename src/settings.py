@@ -7,8 +7,9 @@ import os
 # General
 WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
-BACKGROUND_MUSIC_PATH = "assets/sounds/BackgroundMusic.mp3"
-BACKGROUND_MUSIC_VOLUME = 0.5
+BACKGROUND_MUSIC_PATH = os.path.join("assets", "sounds", "BackgroundMusic.mp3")
+MUSIC_VOLUME = 0.5
+SHOP_MUSIC_PATH  = os.path.join("assets", "sounds", "Shop.mp3")
 BASE_FPS = 60 # 0 for the max FPS
 SLOW_DOWN_FPS = 30
 ICON_IMAGE_PATH = "assets/images/icon.jpg"
@@ -16,12 +17,12 @@ FONT_PATH = "assets/fonts/GameFont.ttf"
 GROUND_LIMIT = WINDOW_SIZE[1]
 TEXT_COLOR = (255, 255, 255)
 LEVELS_ON_THE_SCREEN = 3
-GAME_DIR = os.path.expanduser("Pixel-Run-data")
+SHOP_PATH = os.path.expanduser("~/.pixelshop.json")
 
 # Buttons
-BUTTON_COLOR = (100, 100, 100)
+BUTTON_COLOR = (30, 30, 30)
 BUTTON_SIZE = (500, 150)
-BUTTON_CURSOR_COLOR = (200, 200, 200)
+BUTTON_CURSOR_COLOR = (70, 70, 70)
 
 # Background
 BACKGROUND_SPEED = 3
