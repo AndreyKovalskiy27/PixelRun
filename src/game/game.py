@@ -3,7 +3,7 @@
 
 import settings
 import pygame
-from utils import MainMenu
+from .main_menu import MainMenu
 from .create_game_objects import create_game_objects
 from .event_handler import event_handler
 

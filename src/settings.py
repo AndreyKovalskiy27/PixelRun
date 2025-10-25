@@ -1,6 +1,9 @@
 """Game settings"""
 
 
+import os
+
+
 # General
 WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
@@ -13,6 +16,7 @@ FONT_PATH = "assets/fonts/GameFont.ttf"
 GROUND_LIMIT = WINDOW_SIZE[1]
 TEXT_COLOR = (255, 255, 255)
 LEVELS_ON_THE_SCREEN = 3
+GAME_DIR = os.path.expanduser("Pixel-Run-data")
 
 # Buttons
 BUTTON_COLOR = (100, 100, 100)

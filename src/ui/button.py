@@ -43,5 +43,4 @@ class Button:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if self.button_rect.collidepoint(mouse_pos):
-                    print("Кнопка нажата!")
                     return True
