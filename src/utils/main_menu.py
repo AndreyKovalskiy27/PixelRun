@@ -3,22 +3,25 @@
 
 import pygame
 import settings
+from .button import Button
 
 
 class MainMenu:
     """Games main menu"""
-    def draw_main_menu(self, screen):
+    def __init__(self):
+        """Create all menu objects"""
         """Draw main menu"""
         font = pygame.font.Font(settings.FONT_PATH, 100)
-        text1 = font.render("PIXEL RUN", True, settings.TEXT_COLOR)
-        x = settings.WINDOW_SIZE[0] / 2 - text1.get_width() / 2
-        screen.blit(text1, (x, 0))
+        self.text1 = font.render("PIXEL RUN", True, settings.TEXT_COLOR)
+        self.press_enter_button = Button((650, 196), "Press enter to play")
+        self.button_shop = Button((650, 400), "SHOP")
 
-        font = pygame.font.Font(settings.FONT_PATH, 50)
-        text2 = font.render("Press Enter to play", True, settings.TEXT_COLOR)
-        x = settings.WINDOW_SIZE[0] / 2 - text2.get_width() / 2
-        screen.blit(text2, (x, 300))
 
-        text3 = font.render("Press R to restart the game", True, settings.TEXT_COLOR)
-        x = settings.WINDOW_SIZE[0] / 2 - text3.get_width() / 2
-        screen.blit(text3, (x, 400))
+    def draw_main_menu(self, screen):
+        x = settings.WINDOW_SIZE[0] / 2 - self.text1.get_width() / 2
+        screen.blit(self.text1, (x, 50))
+        self.press_enter_button.draw(screen)
+        self.press_enter_button.update()
+
+        self.button_shop.draw(screen)
+        self.button_shop.update()

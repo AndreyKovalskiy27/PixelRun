@@ -42,6 +42,7 @@ class Game:
                 # Moving objects
                 self.player_object.keyboard_handler()
                 self.player_object.apply_gravity()
+                self.player_object.move_with_background()
                 if self.levels_manager.update(self.player_object):
                     create_game_objects(self)
                     self.game_type = "game"
@@ -52,5 +53,7 @@ class Game:
 
             else:
                 self.main_menu.draw_main_menu(self.screen)
+                if self.main_menu.press_enter_button.is_clicked():
+                    self.game_type = "game"
 
             event_handler(self)
