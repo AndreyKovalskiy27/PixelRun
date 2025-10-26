@@ -46,6 +46,7 @@ class Game:
         self.shop_menu = ShopMenu(self.shop_util)
         self.back_btn = Button((10, 10), "< (Press Enter)", (350, 50))
         self.restart_btn = Button((400, 10), "Restart (Press R)", (350, 50))
+        self.use_shield_btn = Button((800, 10), "Use shield (Press E)", (400, 50))
 
         while True:
             self.clock.tick(settings.BASE_FPS)
@@ -77,7 +78,7 @@ class Game:
                             self.game_type = "game"
 
                     elif _.key == pygame.K_e:
-                        if self.game_type == "game" and not self.shield.is_active:
+                        if self.game_type == "game":
                             if self.shop_util.shields >= 1:
                                 self.shield.use()
                                 self.shop_util.delete_shields()
@@ -106,6 +107,8 @@ class Game:
                 self.back_btn.update()
                 self.restart_btn.draw(self.screen)
                 self.restart_btn.update()
+                self.use_shield_btn.draw(self.screen)
+                self.use_shield_btn.update()
 
                 if self.back_btn.is_clicked(event):
                     self.shield.pause()
@@ -114,6 +117,9 @@ class Game:
                 elif self.restart_btn.is_clicked(event):
                     create_game_objects(self)
                     self.game_type = "game"
+
+                elif self.use_shield_btn.is_clicked(event):
+                    self.shield.use()
 
             elif self.game_type == "shop":
                 self.play_music(settings.SHOP_MUSIC_PATH)

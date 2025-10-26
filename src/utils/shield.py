@@ -38,8 +38,9 @@ class Shield:
         self.pause_start = 0
 
     def use(self):
-        self.is_active = True
-        self.last_tick = pygame.time.get_ticks() - self.paused_time
+        if not self.is_active:
+            self.is_active = True
+            self.last_tick = pygame.time.get_ticks() - self.paused_time
 
     def stop(self):
         self.is_active = False
