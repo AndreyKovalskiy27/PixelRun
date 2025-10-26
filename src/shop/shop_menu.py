@@ -2,24 +2,47 @@
 
 
 from ui import Button, Text
+from .shop_menu_items import ShopMenuItems
+from .shop_util import ShopUtil
 
 
 class ShopMenu:
     """Shop's menu"""
     def __init__(self):
+        # Objects on the screen (text, buttons)
         self.title = Text((0, 0),  "PIXEL SHOP", 100, True)
         self.button_items = Button((10, 0), "ITEMS", (800, 600), 100, False, True)
         self.button_skins = Button((990, 0), "SKINS", (800, 600), 100, False, True)
         self.button_back = Button((10, 10), "<", (50, 50))
+        self.shop_util = ShopUtil()
 
-    def draw(self, screen):
+        # Other
+        self.menu_type = "mainmenu"
+        self.items_menu = ShopMenuItems(self.shop_util)
+
+    def draw(self, screen, pygame_event):
         """Draw shop menu"""
-        self.title.draw(screen)
-        self.button_items.draw(screen)
-        self.button_items.update()
+        if self.menu_type == "mainmenu":
+            self.title.draw(screen)
+            self.button_items.draw(screen)
+            self.button_items.update()
 
-        self.button_skins.draw(screen)
-        self.button_skins.update()
+            self.button_skins.draw(screen)
+            self.button_skins.update()
 
-        self.button_back.draw(screen)
-        self.button_back.update()
+            self.button_back.draw(screen)
+            self.button_back.update()
+
+            if self.button_items.is_clicked(pygame_event):
+                self.menu_type = "items"
+
+            elif self.button_back.is_clicked(pygame_event):
+                return True
+
+        elif self.menu_type == "items":
+            res = self.items_menu.draw(screen, pygame_event)
+            if res:
+                self.menu_type = "mainmenu"
+
+        coins_conuter = Text((1400, 25), f"Coins: {self.shop_util.coins}", 30, color=(255, 255, 0))
+        coins_conuter.draw(screen)

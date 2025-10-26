@@ -7,13 +7,15 @@ import os
 # General
 WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
-BACKGROUND_MUSIC_PATH = os.path.join("assets", "sounds", "BackgroundMusic.mp3")
-MUSIC_VOLUME = 0.5
+MENU_MUSIC_PATH = os.path.join("assets", "sounds", "Menu.mp3")
+GAME_MUSIC_PATH = os.path.join("assets", "sounds", "BackgroundMusic.mp3")
 SHOP_MUSIC_PATH  = os.path.join("assets", "sounds", "Shop.mp3")
+SHIELD_IMAGE_PATH = os.path.join("assets", "images", "shield.png")
+MUSIC_VOLUME = 0.5
 BASE_FPS = 60 # 0 for the max FPS
 SLOW_DOWN_FPS = 30
-ICON_IMAGE_PATH = "assets/images/icon.jpg"
-FONT_PATH = "assets/fonts/GameFont.ttf"
+ICON_IMAGE_PATH = os.path.join("assets", "images", "icon.jpg")
+FONT_PATH = os.path.join("assets", "fonts", "GameFont.ttf")
 GROUND_LIMIT = WINDOW_SIZE[1]
 TEXT_COLOR = (255, 255, 255)
 LEVELS_ON_THE_SCREEN = 3
@@ -39,9 +41,9 @@ PLAYER_JUMP_STRENGHT = 30
 # Player animation
 PLAYER_ANIMATION_DELAY = 150
 PLAYER_START_ANIMATION_SPRITE = 0
-PLAYER_STANDING_SPIRTE_PATH = "assets/images/player/player_standing.PNG"
-PLAYER_RUNNING_SPRITE_PATH = "assets/images/player/player_running.PNG"
-PLAYER_RUNNING2_SPTIRE_PATH = "assets/images/player/player_running2.PNG"
+PLAYER_STANDING_SPIRTE_PATH = os.path.join("assets", "images", "player", "player_standing.PNG")
+PLAYER_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "player", "player_running.PNG")
+PLAYER_RUNNING2_SPTIRE_PATH = os.path.join("assets", "images", "player", "player_running2.PNG")
 
 # Enemies
 TRIANGLE_ENEMY_SIZE = (100, 80)

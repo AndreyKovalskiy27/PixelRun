@@ -29,6 +29,7 @@ class Game:
         """Play background music safely"""
         if self.current_music == path:
             return
+
         pygame.mixer.music.stop()
         pygame.mixer.music.load(path)
         pygame.mixer.music.set_volume(volume)
@@ -71,6 +72,8 @@ class Game:
                             self.game_type = "game"
 
             if self.game_type == "game":
+                self.play_music(settings.GAME_MUSIC_PATH)
+
                 # Moving objects
                 self.player_object.keyboard_handler()
                 self.player_object.apply_gravity()
@@ -96,14 +99,13 @@ class Game:
 
             elif self.game_type == "shop":
                 self.play_music(settings.SHOP_MUSIC_PATH)
-                self.shop_menu.draw(self.screen)
-
-                if self.shop_menu.button_back.is_clicked(event):
+                res = self.shop_menu.draw(self.screen, event)
+                if res:
                     self.game_type = "mainmenu"
 
             elif self.game_type == "mainmenu":
                 # Music
-                self.play_music(settings.BACKGROUND_MUSIC_PATH)
+                self.play_music(settings.MENU_MUSIC_PATH)
                 self.main_menu.draw_main_menu(self.screen)
                 if self.main_menu.press_enter_button.is_clicked(event):
                     self.game_type = "game"

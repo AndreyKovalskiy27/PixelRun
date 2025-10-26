@@ -1,12 +1,8 @@
-"""Base class for all buttons in the game"""
-
-
 import pygame
 import settings
 
 
 class Button:
-    """Button"""
     def __init__(self, position, text,
                  size = settings.BUTTON_SIZE,
                  text_size = 30,
@@ -31,12 +27,10 @@ class Button:
                                                     self.y + self.surface.get_height() / 2))
 
     def draw(self, screen):
-        """Draw button on the screen"""
         screen.blit(self.surface, (self.x, self.y))
         screen.blit(self.text, self.text_rect)
 
     def update(self):
-        """Update button"""
         mouse_pos = pygame.mouse.get_pos()
        
 
@@ -48,7 +42,6 @@ class Button:
 
 
     def is_clicked(self, event):
-        """Returns True if button is being clicked by mouse"""
         mouse_pos = pygame.mouse.get_pos()
 
         for _ in event:
