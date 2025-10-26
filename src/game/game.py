@@ -7,6 +7,7 @@ from shop import ShopMenu
 from .main_menu import MainMenu
 from .create_game_objects import create_game_objects
 from ui import Button
+from shop import ShopUtil
 
 
 class Game:
@@ -18,6 +19,7 @@ class Game:
         pygame.font.init()
 
         self.screen = pygame.display.set_mode(settings.WINDOW_SIZE)
+        self.shop_util = ShopUtil()
         pygame.display.set_caption("Pixel run")
 
         icon = pygame.image.load(settings.ICON_IMAGE_PATH)
@@ -41,7 +43,7 @@ class Game:
         create_game_objects(self)
         self.clock = pygame.time.Clock()
         self.main_menu = MainMenu()
-        self.shop_menu = ShopMenu()
+        self.shop_menu = ShopMenu(self.shop_util)
         self.back_btn = Button((10, 10), "< (Press Enter)", (350, 50))
         self.restart_btn = Button((400, 10), "Restart (Press R)", (350, 50))
 
@@ -65,11 +67,20 @@ class Game:
                         if self.game_type != "shop":
                             self.game_type = "game" if self.game_type == "mainmenu" else "mainmenu"
 
+                            if self.game_type == "game":
+                                self.shield.resume()
+
                     # Restart
                     elif _.key == pygame.K_r:
                         if self.game_type == "game":
                             create_game_objects(self)
                             self.game_type = "game"
+
+                    elif _.key == pygame.K_e:
+                        if self.game_type == "game" and not self.shield.is_active:
+                            if self.shop_util.shields >= 1:
+                                self.shield.use()
+                                self.shop_util.delete_shields()
 
             if self.game_type == "game":
                 self.play_music(settings.GAME_MUSIC_PATH)
@@ -78,9 +89,15 @@ class Game:
                 self.player_object.keyboard_handler()
                 self.player_object.apply_gravity()
                 self.player_object.move_with_background()
-                if self.levels_manager.update(self.player_object):
-                    create_game_objects(self)
-                    self.game_type = "game"
+
+                res = self.levels_manager.update(self.player_object)
+                if not self.shield.is_active:
+                    if res:
+                        create_game_objects(self)
+                        self.game_type = "game"
+
+                else:
+                    self.shield.draw(self.screen)
                 
                 # Drawing game objects
                 self.player_object.draw(self.screen)
@@ -91,6 +108,7 @@ class Game:
                 self.restart_btn.update()
 
                 if self.back_btn.is_clicked(event):
+                    self.shield.pause()
                     self.game_type = "mainmenu"
 
                 elif self.restart_btn.is_clicked(event):
@@ -109,6 +127,7 @@ class Game:
                 self.main_menu.draw_main_menu(self.screen)
                 if self.main_menu.press_enter_button.is_clicked(event):
                     self.game_type = "game"
+                    self.shield.resume()
 
                 elif self.main_menu.button_shop.is_clicked(event):
                     self.game_type = "shop"

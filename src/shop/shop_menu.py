@@ -8,13 +8,13 @@ from .shop_util import ShopUtil
 
 class ShopMenu:
     """Shop's menu"""
-    def __init__(self):
+    def __init__(self, shop_util):
         # Objects on the screen (text, buttons)
         self.title = Text((0, 0),  "PIXEL SHOP", 100, True)
         self.button_items = Button((10, 0), "ITEMS", (800, 600), 100, False, True)
         self.button_skins = Button((990, 0), "SKINS", (800, 600), 100, False, True)
         self.button_back = Button((10, 10), "<", (50, 50))
-        self.shop_util = ShopUtil()
+        self.shop_util = shop_util
 
         # Other
         self.menu_type = "mainmenu"
