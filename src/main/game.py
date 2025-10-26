@@ -58,7 +58,6 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     self.create_game_objects()
-                    self.shield = Shield(self.player_object, self.shop_util)
                     self.notifier.show("game_restarted")
 
                 elif event.key == pygame.K_e:
@@ -106,6 +105,7 @@ class Game:
 
         elif self.restart_btn.is_clicked(event):
             self.create_game_objects()
+            self.notifier.show("game_restarted")
 
         elif self.use_shield_btn.is_clicked(event):
             self.use_shield()

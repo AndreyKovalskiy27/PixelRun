@@ -8,7 +8,7 @@ import os
 WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
 MENU_MUSIC_PATH = os.path.join("assets", "sounds", "Menu.mp3")
-GAME_MUSIC_PATH = os.path.join("assets", "sounds", "BackgroundMusic.mp3")
+GAME_MUSIC_PATH = os.path.join("assets", "sounds", "Game.mp3")
 SHOP_MUSIC_PATH  = os.path.join("assets", "sounds", "Shop.mp3")
 SHIELD_IMAGE_PATH = os.path.join("assets", "images", "shield.png")
 MUSIC_VOLUME = 0.5
