@@ -3,6 +3,7 @@
 
 import pygame
 import settings
+from .timer import Timer
 
 
 class PlayerAnimation:
@@ -14,9 +15,9 @@ class PlayerAnimation:
         self.__current_running_sprite = settings.PLAYER_START_ANIMATION_SPRITE
 
         # For animation delay
-        self.__last_update = 0
-        self.__animation_delay = settings.PLAYER_ANIMATION_DELAY
-
+        self.timer = Timer(settings.PLAYER_ANIMATION_DELAY)
+        self.timer.start()
+        
         # Loading sprites
         player_size = settings.PLAYER_SIZE
         self.__standing_sprite = pygame.transform.scale(
@@ -48,10 +49,9 @@ class PlayerAnimation:
                 surface = pygame.transform.flip(self.__standing_sprite, True, False)
 
         # Animation
-        current_tick = pygame.time.get_ticks()
-        if current_tick - self.__last_update > self.__animation_delay:
+        if self.timer.update():
             self.__current_running_sprite = 0 if self.__current_running_sprite else 1
-            self.__last_update = current_tick
+            self.timer.start()
 
         # If player is moving left
         if self.__moving_status == "running" and self.__moving_direction == "left":

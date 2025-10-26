@@ -5,9 +5,10 @@ import settings
 import pygame
 from shop import ShopMenu
 from .main_menu import MainMenu
-from .create_game_objects import create_game_objects
 from ui import Button
 from shop import ShopUtil
+from objects import Player, Shield
+from utils import LevelsManager
 
 
 class Game:
@@ -27,6 +28,16 @@ class Game:
 
         self.current_music = None
 
+    def create_game_objects(self):
+        """Create game objects"""
+        # Game objects
+        self.player_object = Player()
+        self.shield = Shield(self.player_object)
+        self.levels_manager = LevelsManager()
+
+        # Others
+        self.game_type = "mainmenu"
+
     def play_music(self, path, volume=settings.MUSIC_VOLUME):
         """Play background music safely"""
         if self.current_music == path:
@@ -40,7 +51,7 @@ class Game:
 
     def mainloop(self):
         """Main loop of the game"""
-        create_game_objects(self)
+        self.create_game_objects()
         self.clock = pygame.time.Clock()
         self.main_menu = MainMenu()
         self.shop_menu = ShopMenu(self.shop_util)
@@ -69,12 +80,12 @@ class Game:
                             self.game_type = "game" if self.game_type == "mainmenu" else "mainmenu"
 
                             if self.game_type == "game":
-                                self.shield.resume()
+                                self.shield.timer.resume()
 
                     # Restart
                     elif _.key == pygame.K_r:
                         if self.game_type == "game":
-                            create_game_objects(self)
+                            self.create_game_objects()
                             self.game_type = "game"
 
                     elif _.key == pygame.K_e:
@@ -92,14 +103,12 @@ class Game:
                 self.player_object.move_with_background()
 
                 res = self.levels_manager.update(self.player_object)
-                if not self.shield.is_active:
-                    if res:
-                        create_game_objects(self)
-                        self.game_type = "game"
+                if res and not self.shield.is_active:
+                    self.create_game_objects()
+                    self.game_type = "game"
 
-                else:
-                    self.shield.draw(self.screen)
-                
+                self.shield.draw(self.screen)
+
                 # Drawing game objects
                 self.player_object.draw(self.screen)
                 self.levels_manager.draw(self.screen)
@@ -111,15 +120,16 @@ class Game:
                 self.use_shield_btn.update()
 
                 if self.back_btn.is_clicked(event):
-                    self.shield.pause()
+                    self.shield.timer.pause()
                     self.game_type = "mainmenu"
 
                 elif self.restart_btn.is_clicked(event):
-                    create_game_objects(self)
+                    self.create_game_objects()
                     self.game_type = "game"
 
                 elif self.use_shield_btn.is_clicked(event):
-                    self.shield.use()
+                    if self.shop_util.shields >= 1:
+                        self.shield.use()
 
             elif self.game_type == "shop":
                 self.play_music(settings.SHOP_MUSIC_PATH)
@@ -133,7 +143,7 @@ class Game:
                 self.main_menu.draw_main_menu(self.screen)
                 if self.main_menu.press_enter_button.is_clicked(event):
                     self.game_type = "game"
-                    self.shield.resume()
+                    self.shield.timer.resume()
 
                 elif self.main_menu.button_shop.is_clicked(event):
                     self.game_type = "shop"
