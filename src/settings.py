@@ -21,6 +21,7 @@ TEXT_COLOR = (255, 255, 255)
 LEVELS_ON_THE_SCREEN = 3
 SHOP_PATH = os.path.expanduser("~/.pixelshop.json")
 SHIELD_LASTS_FOR = 10000
+MESSAGE_LASTS_FOR = 3000
 
 # Buttons
 BUTTON_COLOR = (30, 30, 30)

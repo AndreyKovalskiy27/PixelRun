@@ -4,6 +4,7 @@
 import pygame
 import settings
 from ui import Button, Text
+from utils import Message
 
 
 class ShopMenuItems:
@@ -23,7 +24,8 @@ class ShopMenuItems:
 
         self.text1 = Text((0, self.shield_image_y - 50), "Shield", 30, True)
         self.text2 = Text((0, self.shield_image_y + 200), "Makes you invinsible for 10 seconds", 30, True)
-        self.user_message = Text((0, 200), "", 30, True)
+        self.bought_shield_message = Message("You succefly bought a shield! :)", (0, 255, 0))
+        self.fail_message = Message("You don't have money to buy 1 shield... Go away!!!", (255, 0, 0))
         self.shop_util = shop_util
 
     def draw(self, screen, pygame_event):
@@ -48,7 +50,8 @@ class ShopMenuItems:
 
         self.text1.draw(screen)
         self.text2.draw(screen)
-        self.user_message.draw(screen)
+        self.bought_shield_message.draw(screen)
+        self.fail_message.draw(screen)
 
         current_amount = Text((0, self.shield_image_y + 350), f"Current amount: {self.shop_util.shields}", 30, True)
         current_amount.draw(screen)
@@ -58,12 +61,10 @@ class ShopMenuItems:
 
         elif self.button_buy.is_clicked(pygame_event):
             try:
-                self.shop_util.buy_shields(1)
-                self.user_message.color = (0, 255, 0)
-                self.user_message.change_text("You succefly bought shield!")
-    
+                self.shop_util.buy_shields()
+                self.fail_message.hide()
+                self.bought_shield_message.show()
 
             except:
-                self.user_message.color = (255, 0, 0)
-                self.user_message.change_text("You don't have enought coins to buy shield!")
-    
+                self.bought_shield_message.hide()
+                self.fail_message.show()

@@ -7,8 +7,10 @@ from shop import ShopMenu
 from .main_menu import MainMenu
 from ui import Button
 from shop import ShopUtil
-from objects import Player, Shield
+from objects import Player
+from objects.shield import Shield
 from utils import LevelsManager
+from utils import Message
 
 
 class Game:
@@ -58,6 +60,9 @@ class Game:
         self.back_btn = Button((10, 10), "< (Press Enter)", (350, 50))
         self.restart_btn = Button((400, 10), "Restart (Press R)", (350, 50))
         self.use_shield_btn = Button((800, 10), "Use shield (Press E)", (400, 50))
+        self.no_shields_message = Message("You don't have shields", (255, 0, 0))
+        self.shield_is_active_message = Message("Shield is already active", (255, 0, 0))
+        self.shield_used_message = Message("Shield was succefly used!", (0, 255, 0))
 
         while True:
             self.clock.tick(settings.BASE_FPS)
@@ -91,8 +96,20 @@ class Game:
                     elif _.key == pygame.K_e:
                         if self.game_type == "game":
                             if self.shop_util.shields >= 1:
-                                self.shield.use()
-                                self.shop_util.delete_shields()
+                                if not self.shield.is_active:
+                                    self.shield.use()
+                                    self.shield_is_active_message.hide()
+                                    self.no_shields_message.hide()
+                                    self.shield_used_message.show()
+
+                                else:
+                                    self.no_shields_message.hide()
+                                    self.shield_used_message.hide()
+                                    self.shield_is_active_message.show()
+                            else:
+                                self.shield_used_message.hide()
+                                self.shield_is_active_message.hide()
+                                self.no_shields_message.show()
 
             if self.game_type == "game":
                 self.play_music(settings.GAME_MUSIC_PATH)
@@ -118,6 +135,9 @@ class Game:
                 self.restart_btn.update()
                 self.use_shield_btn.draw(self.screen)
                 self.use_shield_btn.update()
+                self.no_shields_message.draw(self.screen)
+                self.shield_is_active_message.draw(self.screen)
+                self.shield_used_message.draw(self.screen)
 
                 if self.back_btn.is_clicked(event):
                     self.shield.timer.pause()
@@ -129,7 +149,20 @@ class Game:
 
                 elif self.use_shield_btn.is_clicked(event):
                     if self.shop_util.shields >= 1:
-                        self.shield.use()
+                        if not self.shield.is_active:
+                            self.shield.use()
+                            self.shield_is_active_message.hide()
+                            self.no_shields_message.hide()
+                            self.shield_used_message.show()
+
+                        else:
+                            self.no_shields_message.hide()
+                            self.shield_used_message.hide()
+                            self.shield_is_active_message.show()
+                    else:
+                        self.shield_used_message.hide()
+                        self.shield_is_active_message.show()
+                        self.no_shields_message.show()
 
             elif self.game_type == "shop":
                 self.play_music(settings.SHOP_MUSIC_PATH)

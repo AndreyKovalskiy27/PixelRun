@@ -36,3 +36,10 @@ class Timer:
             pause_end = pygame.time.get_ticks()
             self.total_paused += pause_end - self.pause_start
             self.is_paused = False
+
+    def reset(self):
+        self.start_tick = 0
+        self.is_active = False
+        self.is_paused = False
+        self.pause_start = 0
+        self.total_paused = 0
