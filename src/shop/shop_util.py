@@ -6,7 +6,7 @@ class ShopUtil:
     def __init__(self):
         self.shop_path = settings.SHOP_PATH
         self.shop_data = self.load_shop_util()
-        self.shield_price = 5
+        self.shield_price = 20
 
     def load_shop_util(self):
         try:
@@ -23,7 +23,7 @@ class ShopUtil:
         self.shop_data["coins"] += amount
         self.save()
 
-    def delete_coins(self, amount=5):
+    def delete_coins(self, amount=20):
         self.shop_data["coins"] = max(0, self.shop_data["coins"] - amount)
         self.save()
 
