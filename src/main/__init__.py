@@ -1,7 +1,7 @@
 """Game's mainloop, keyhandlers, e.t.c"""
 
 
-from .game import Game
+from .main import Main
 
 
-__all__ = ["Game"]
+__all__ = ["Main"]
