@@ -22,9 +22,14 @@ class Level:
             if type(obj) == objects.Platform:
                 obj.stop_player(player)
 
+            elif type(obj) == objects.Coin:
+                if obj.check_collision(player):
+                    obj.was_collected = True
+                    return "coin"
+
             else:
                 if obj.check_collision(player):
-                    was_killed = True
+                    was_killed = "killed"
 
                 if type(obj) == objects.SniperEnemy:
                     obj.update()
@@ -113,4 +118,79 @@ class Level_5(Level):
             objects.TriangleEnemy((1460, 687)),
             objects.TriangleEnemy((1570, 687)),
             objects.SniperEnemy((1680, 220))  # Sniper at the end
+        ]
+
+
+class Level_6(Level):
+    """Level 6"""
+    def __init__(self):
+        super().__init__()
+
+        self.objects = [
+            objects.Platform((150, 550)),
+            objects.TriangleEnemy((200, 500)),
+            objects.Platform((500, 380)),
+            objects.SniperEnemy((1200, 200)),
+            objects.Coin((170, 500)),
+            objects.Coin((520, 330))
+        ]
+
+
+class Level_7(Level):
+    """Level 7"""
+    def __init__(self):
+        super().__init__()
+
+        self.objects = [
+            objects.Platform((100, 400)),
+            objects.TriangleEnemy((150, 350)),
+            objects.Platform((400, 500)),
+            objects.SniperEnemy((1000, 150)),
+            objects.Coin((120, 350)),
+            objects.Coin((420, 450))
+        ]
+
+
+class Level_8(Level):
+    """Level 8"""
+    def __init__(self):
+        super().__init__()
+
+        self.objects = [
+            objects.Platform((200, 550)),
+            objects.TriangleEnemy((250, 500)),
+            objects.Platform((500, 400)),
+            objects.SniperEnemy((1200, 200)),
+            objects.Coin((220, 500)),
+            objects.Coin((520, 350))
+        ]
+
+
+class Level_9(Level):
+    """Level 9"""
+    def __init__(self):
+        super().__init__()
+
+        self.objects = [
+            objects.Platform((150, 500)),
+            objects.TriangleEnemy((200, 450)),
+            objects.Platform((450, 350)),
+            objects.SniperEnemy((1100, 250)),
+            objects.Coin((170, 450)),
+            objects.Coin((470, 300))
+        ]
+
+
+class Level_10(Level):
+    """Level 10"""
+    def __init__(self):
+        super().__init__()
+
+        self.objects = [
+            objects.Platform((100, 600)),
+            objects.TriangleEnemy((150, 550)),
+            objects.Platform((400, 400)),
+            objects.SniperEnemy((1000, 200)),
+            objects.Coin((120, 550)),
+            objects.Coin((420, 350))
         ]

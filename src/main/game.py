@@ -51,7 +51,7 @@ class Game:
         # Game objects
         self.player_object = Player()
         self.shield = Shield(self.player_object, self.shop_util)
-        self.levels_manager = LevelsManager()
+        self.levels_manager = LevelsManager(self.shop_util)
 
     def keyboard_handler(self, pygame_event):
         for event in pygame_event:
