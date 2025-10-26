@@ -11,6 +11,7 @@ MENU_MUSIC_PATH = os.path.join("assets", "sounds", "Menu.mp3")
 GAME_MUSIC_PATH = os.path.join("assets", "sounds", "Game.mp3")
 SHOP_MUSIC_PATH  = os.path.join("assets", "sounds", "Shop.mp3")
 SHIELD_IMAGE_PATH = os.path.join("assets", "images", "shield.png")
+COPYRIGHT_IMAGE_PATH = os.path.join("assets", "images", "copyright.png")
 MUSIC_VOLUME = 0.5
 BASE_FPS = 60 # 0 for the max FPS
 SLOW_DOWN_FPS = 30

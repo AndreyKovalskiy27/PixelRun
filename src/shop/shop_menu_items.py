@@ -11,10 +11,10 @@ class ShopMenuItems:
     """Items menu"""
     def __init__(self, shop_util):
         self.title = Text((0, 0), "PIXEL ITEMS", 100, True)
-        self.button_back = Button((10, 10), "<", (50, 50))
-        self.button_left = Button((410, 0), "<", (100, 100), 100, center_y=True)
-        self.button_right = Button((1290, 0), ">", (100, 100), 100, center_y=True)
-        self.button_buy = Button((0, 550), "Buy (20 coins)", size=(300, 75), center_x=True)
+        self.button_back = Button((10, 10), "<", button_size=(50, 50))
+        self.button_left = Button((410, 0), "<", button_size=(100, 100), size=100, center_y=True)
+        self.button_right = Button((1290, 0), ">", button_size=(100, 100), size=100, center_y=True)
+        self.button_buy = Button((0, 550), "Buy (20 coins)", button_size=(300, 75), center_x=True)
 
         # Shield image
         self.shield_image = pygame.image.load(settings.SHIELD_IMAGE_PATH)

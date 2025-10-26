@@ -2,22 +2,72 @@
 
 
 from ui import Button, Text
+import settings
+import pygame
 
+
+class CopyrightWindow:
+    def __init__(self):
+        self.copyright_box = pygame.Surface((800, 600))
+        self.copyright_box.fill((25, 25, 25))
+        self.copyright_box_x = settings.WINDOW_SIZE[0] / 2 - self.copyright_box.get_width() / 2
+        self.copyright_box_y = settings.WINDOW_SIZE[1] / 2 - self.copyright_box.get_height() / 2
+
+        self.text1 = Text((550, 0), "PIXEL COPYRIGHT", 100, True)
+        self.text2 = Text((0, 300), "Shop/main menu theme: 1nicopatty", 30, True)
+        self.text3 = Text((0, 350), "Default game theme: LSPlash", 30, True)
+        self.text4 = Text((0, 400), "Source code/programer: angrymuncifan2888", 30, True)
+        self.text5 = Text((0, 450), "Thanks to Python and PyGame developers!", 30, True)
+
+        self.copyright_on = False
+
+    def draw(self, screen):
+        if self.copyright_on:
+            screen.blit(self.copyright_box, (
+                self.copyright_box_x,
+                self.copyright_box_y
+            ))
+
+            self.text2.draw(screen)
+            self.text3.draw(screen)
+            self.text4.draw(screen)
+            self.text5.draw(screen)
 
 class MainMenu:
     """Games main menu"""
     def __init__(self):
         """Create all menu objects"""
-        self.text1 = Text((550, 0), "PIXEL RUN", 100, True)
+        self.text2 = Text((550, 0), "PIXEL RUN", 100, True)
         self.press_enter_button = Button((0, 196), "Press enter to play", center_x=True)
-        self.button_shop = Button((0, 400), "SHOP (NEW)", text_size=60, center_x=True)
+        self.button_shop = Button((0, 400), "SHOP (NEW)", size=60, center_x=True)
+        self.button_copyright = Button((10, 0), pygame.image.load(settings.COPYRIGHT_IMAGE_PATH),
+                                       size=(150, 150), button_size=(200, 200), center_y=True)
 
+        self.copyright = CopyrightWindow()
 
-    def draw_main_menu(self, screen):
+    def draw_main_menu(self, screen, pygame_event):
         """Draw main menu"""
-        self.text1.draw(screen)
-        self.press_enter_button.draw(screen)
-        self.press_enter_button.update()
+        self.button_copyright.draw(screen)
+        self.button_copyright.update()
 
-        self.button_shop.draw(screen)
-        self.button_shop.update()
+        self.copyright.draw(screen)
+
+        if not self.copyright.copyright_on:
+            self.text2.draw(screen)
+            self.press_enter_button.draw(screen)
+            self.press_enter_button.update()
+
+            self.button_shop.draw(screen)
+            self.button_shop.update()
+
+            if self.press_enter_button.is_clicked(pygame_event):
+                return "game"
+
+            elif self.button_shop.is_clicked(pygame_event):
+                return "shop"
+
+        else:
+            self.copyright.text1.draw(screen)
+
+        if self.button_copyright.is_clicked(pygame_event):
+            self.copyright.copyright_on = True if not self.copyright.copyright_on else False

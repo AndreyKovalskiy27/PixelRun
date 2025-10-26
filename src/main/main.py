@@ -84,10 +84,6 @@ class Main:
             elif self.game_type == "mainmenu":
                 # Music
                 self.play_music(settings.MENU_MUSIC_PATH)
-                self.main_menu.draw_main_menu(self.screen)
-                if self.main_menu.press_enter_button.is_clicked(event):
-                    self.game_type = "game"
-                    self.game_menu.shield.timer.resume()
-
-                elif self.main_menu.button_shop.is_clicked(event):
-                    self.game_type = "shop"
+                res = self.main_menu.draw_main_menu(self.screen, event)
+                if res:
+                    self.game_type = res

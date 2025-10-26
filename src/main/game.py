@@ -37,9 +37,9 @@ class GameNotifier:
 
 class Game:
     def __init__(self, shop_util):
-        self.back_btn = Button((10, 10), "< (Press Enter)", (350, 50))
-        self.restart_btn = Button((400, 10), "Restart (Press R)", (350, 50))
-        self.use_shield_btn = Button((800, 10), "Use shield (Press E)", (400, 50))
+        self.back_btn = Button((10, 10), "< (Press Enter)", button_size=(350, 50))
+        self.restart_btn = Button((400, 10), "Restart (Press R)", button_size=(350, 50))
+        self.use_shield_btn = Button((800, 10), "Use shield (Press E)", button_size=(400, 50))
 
         self.notifier = GameNotifier()
         self.shop_util = shop_util
