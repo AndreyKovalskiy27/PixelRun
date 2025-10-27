@@ -31,8 +31,9 @@ class ShopUtil:
             "angry_munci": Skin(
                 "Angry Munci", 50, "ANGRY MUNCI ON TOP!!!",
                 [settings.ANGRY_MUNCI_STANDING_SPRITE_PATH,
-                 settings.ANGRY_MUNCI_STANDING_SPRITE_PATH,
-                 settings.ANGRY_MUNCI_STANDING_SPRITE_PATH], "angry_munci"
+                 settings.ANGRY_MUNCI_RUNNING_SPRITE_PATH,
+                 settings.ANGRY_MUNCI_RUNNING2_SPRITE_PATH,
+                 settings.ANGRY_MUNCI_RUNNING3_SPRITE_PATH], "angry_munci"
             )
         }
 

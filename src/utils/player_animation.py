@@ -26,12 +26,16 @@ class PlayerAnimation:
         shop_util = ShopUtil()
         skin = shop_util.current_skin()
         player_size = settings.PLAYER_SIZE
+
         self.__standing_sprite = pygame.transform.scale(
-                                pygame.image.load(skin.sprites[0]), player_size)
-        self.__running_sprites = [pygame.transform.scale(pygame.image.load(skin.sprites[1]), player_size),
-                                pygame.transform.scale(pygame.image.load(skin.sprites[2]), player_size)
-                                ]
- 
+            pygame.image.load(skin.sprites[0]), player_size
+        )
+
+        self.__running_sprites = [
+            pygame.transform.scale(pygame.image.load(sprite), player_size)
+            for sprite in skin.sprites[1:]
+        ]
+
     def change_direction(self, direction):
         """Change player's direction"""
         if direction != "standing":
@@ -58,7 +62,7 @@ class PlayerAnimation:
 
         # Animation
         if self.timer.update():
-            self.__current_running_sprite = 0 if self.__current_running_sprite else 1
+            self.__current_running_sprite = (self.__current_running_sprite + 1) % len(self.__running_sprites)
             self.timer.start()
 
         # If player is moving left
