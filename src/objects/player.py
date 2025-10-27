@@ -66,7 +66,9 @@ class Player(Object):
                 self.velocity_y = -self.jump_strength  # Go up
                 self.on_ground = False
 
-        # Standing if not moving
+                sound = pygame.mixer.Sound(settings.JUMP_SOUND_EFFECT_PATH)
+                sound.play()
+
         if not moving:
             self.animation.change_direction("standing")
 

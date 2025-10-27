@@ -65,6 +65,7 @@ class Main:
                     if _.key == pygame.K_RETURN:
                         if self.game_type != "shop":
                             self.game_type = "game" if self.game_type == "mainmenu" else "mainmenu"
+                            self.game_menu.shield.timer.pause()
 
                             if self.game_type == "game":
                                 self.game_menu.shield.timer.resume()
