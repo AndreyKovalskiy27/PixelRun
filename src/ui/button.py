@@ -62,9 +62,13 @@ class Button:
         else:
             self.surface.fill(settings.BUTTON_COLOR)
 
-    def is_clicked(self, event):
+    def is_clicked(self, event, play_sound = True):
         mouse_pos = pygame.mouse.get_pos()
         for e in event:
             if e.type == pygame.MOUSEBUTTONDOWN and e.button == 1:
                 if self.button_rect.collidepoint(mouse_pos):
+                    if play_sound:
+                        sound = pygame.mixer.Sound(settings.BUTTON_SOUND_EFFECT_PATH)
+                        sound.play()
+
                     return True

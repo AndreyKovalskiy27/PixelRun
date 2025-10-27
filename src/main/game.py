@@ -2,6 +2,7 @@
 
 
 import pygame
+import settings
 from ui import Button
 from objects import Player
 from objects.shield import Shield
@@ -84,6 +85,8 @@ class Game:
         res = self.levels_manager.update(self.player_object)
         if res and not self.shield.is_active:
             self.create_game_objects()
+            # sound = pygame.mixer.Sound(settings.DEATH_SOUND_EFFECT_PATH)
+            # sound.play()
 
         self.shield.draw(screen)
 

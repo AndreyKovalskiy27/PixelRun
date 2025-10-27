@@ -24,6 +24,13 @@ SHOP_PATH = os.path.expanduser("~/.pixelshop.json")
 SHIELD_LASTS_FOR = 10000
 MESSAGE_LASTS_FOR = 3000
 
+# Sound effects
+BUTTON_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "button.mp3")
+BUY_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "buy_sound.mp3")
+COIN_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "button.mp3")
+JUMP_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "jump.mp3")
+DEATH_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "rip.mp3")
+
 # Buttons
 BUTTON_COLOR = (30, 30, 30)
 BUTTON_SIZE = (500, 150)
@@ -42,7 +49,7 @@ PLAYER_GRAVITY = 1
 PLAYER_JUMP_STRENGHT = 30
 
 # Player animation
-PLAYER_ANIMATION_DELAY = 150
+PLAYER_ANIMATION_DELAY = 100
 PLAYER_START_ANIMATION_SPRITE = 0
 PLAYER_STANDING_SPIRTE_PATH = os.path.join("assets", "images", "player", "player_standing.PNG")
 PLAYER_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "player", "player_running.PNG")

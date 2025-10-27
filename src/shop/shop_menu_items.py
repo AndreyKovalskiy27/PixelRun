@@ -52,11 +52,13 @@ class ShopMenuItems:
         if self.button_back.is_clicked(pygame_event):
             return True
 
-        elif self.button_buy.is_clicked(pygame_event):
+        elif self.button_buy.is_clicked(pygame_event, False):
             try:
                 self.shop_util.buy_shields()
                 self.fail_message.hide()
                 self.bought_shield_message.show()
+                sound = pygame.mixer.Sound(settings.BUY_SOUND_EFFECT_PATH)
+                sound.play()
 
             except:
                 self.bought_shield_message.hide()

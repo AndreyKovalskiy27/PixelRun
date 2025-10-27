@@ -92,11 +92,13 @@ class ShopMenuSkins:
             if self.current_skin > 0:
                 self.current_skin -= 1
 
-        elif self.button_buy.is_clicked(event):
+        elif self.button_buy.is_clicked(event, False):
             if not skin_obj.is_bought:
                 try:
                     self.shop_util.buy_skin(skin_obj.id)
                     self.notifier.show("skin_bought")
+                    sound = pygame.mixer.Sound(settings.BUY_SOUND_EFFECT_PATH)
+                    sound.play()
 
                 except:
                     self.notifier.show("not_enought_coins")
