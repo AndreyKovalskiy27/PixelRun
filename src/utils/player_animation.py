@@ -1,6 +1,3 @@
-"""Player animation"""
-
-
 import pygame
 import settings
 from .timer import Timer
@@ -8,69 +5,63 @@ from shop import ShopUtil
 
 
 class PlayerAnimation:
-    """Class for animating player"""
     def __init__(self):
-        # For animations
         self.__moving_status = "standing"
         self.__moving_direction = "right"
         self.__current_running_sprite = settings.PLAYER_START_ANIMATION_SPRITE
 
-        # For animation delay
         self.timer = Timer(settings.PLAYER_ANIMATION_DELAY)
         self.timer.start()
 
-        self.load_sprites()
+        self.__last_skin_name = None
+        self.__standing_sprite = None
+        self.__running_sprites = []
 
-    def load_sprites(self):
-        # Loading sprites
+        self.update_skin_if_needed()
+
+    def update_skin_if_needed(self):
         shop_util = ShopUtil()
         skin = shop_util.current_skin()
-        player_size = settings.PLAYER_SIZE
 
-        self.__standing_sprite = pygame.transform.scale(
-            pygame.image.load(skin.sprites[0]), player_size
-        )
+        if skin.title != self.__last_skin_name:
+            self.__last_skin_name = skin.title
 
-        self.__running_sprites = [
-            pygame.transform.scale(pygame.image.load(sprite), player_size)
-            for sprite in skin.sprites[1:]
-        ]
+            player_size = settings.PLAYER_SIZE
+
+            self.__standing_sprite = pygame.image.load(skin.sprites[0]).convert_alpha()
+            self.__standing_sprite = pygame.transform.scale(self.__standing_sprite, player_size)
+
+            self.__running_sprites = []
+            for sprite_path in skin.sprites[1:]:
+                sprite = pygame.image.load(sprite_path).convert_alpha()
+                sprite = pygame.transform.scale(sprite, player_size)
+                self.__running_sprites.append(sprite)
 
     def change_direction(self, direction):
-        """Change player's direction"""
         if direction != "standing":
             self.__moving_direction = direction
             self.__moving_status = "running"
-
         else:
             self.__moving_status = "standing"
 
     @property
     def current_sprite(self):
-        """Get current player sprite"""
-        # If player is standing
-        self.load_sprites()
+        self.update_skin_if_needed()
 
         if self.__moving_status == "standing":
-            # If player is faced to the right
             if self.__moving_direction == "right":
                 surface = self.__standing_sprite
-
-            # If player is faced to the left
             else:
                 surface = pygame.transform.flip(self.__standing_sprite, True, False)
+        else:
+            if self.timer.update():
+                self.__current_running_sprite = (self.__current_running_sprite + 1) % len(self.__running_sprites)
+                self.timer.start()
 
-        # Animation
-        if self.timer.update():
-            self.__current_running_sprite = (self.__current_running_sprite + 1) % len(self.__running_sprites)
-            self.timer.start()
-
-        # If player is moving left
-        if self.__moving_status == "running" and self.__moving_direction == "left":
-            surface = pygame.transform.flip(self.__running_sprites[self.__current_running_sprite], True, False)
-
-        # If player is moving right
-        elif self.__moving_status == "running" and self.__moving_direction == "right":
-            surface = self.__running_sprites[self.__current_running_sprite]
+            sprite = self.__running_sprites[self.__current_running_sprite]
+            if self.__moving_direction == "right":
+                surface = sprite
+            else:
+                surface = pygame.transform.flip(sprite, True, False)
 
         return surface

@@ -33,7 +33,7 @@ BUTTON_CURSOR_COLOR = (70, 70, 70)
 BACKGROUND_SPEED = 3
 
 # PLayer
-PLAYER_SIZE = (63, 70)
+PLAYER_SIZE = (80, 100)
 PLAYER_SPEED = 10
 PLAYER_BASE_POSITION = (0, 560)
 
@@ -47,11 +47,18 @@ PLAYER_START_ANIMATION_SPRITE = 0
 PLAYER_STANDING_SPIRTE_PATH = os.path.join("assets", "images", "player", "player_standing.PNG")
 PLAYER_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "player", "player_running.PNG")
 PLAYER_RUNNING2_SPTIRE_PATH = os.path.join("assets", "images", "player", "player_running2.PNG")
+
 ANGRY_MUNCI_STANDING_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_standing.PNG")
 ANGRY_MUNCI_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_running.PNG")
 ANGRY_MUNCI_RUNNING2_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_running2.PNG")
 ANGRY_MUNCI_RUNNING3_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_running3.PNG")
 
+CAT_JARD_STANDING_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_standing.PNG")
+CAT_JARD_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running.PNG")
+CAT_JARD_RUNNING2_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running2.PNG")
+CAT_JARD_RUNNING3_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running3.PNG")
+CAT_JARD_RUNNING4_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running4.PNG")
+CAT_JARD_RUNNING5_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running5.PNG")
 
 # Enemies
 TRIANGLE_ENEMY_SIZE = (100, 80)

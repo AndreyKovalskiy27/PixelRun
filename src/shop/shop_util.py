@@ -34,6 +34,15 @@ class ShopUtil:
                  settings.ANGRY_MUNCI_RUNNING_SPRITE_PATH,
                  settings.ANGRY_MUNCI_RUNNING2_SPRITE_PATH,
                  settings.ANGRY_MUNCI_RUNNING3_SPRITE_PATH], "angry_munci"
+            ),
+            "cat_jard": Skin(
+                "Cat Jard", 125, "He stays on your ass and makes sure you die pretty much",
+                [settings.CAT_JARD_STANDING_SPRITE_PATH,
+                 settings.CAT_JARD_RUNNING_SPRITE_PATH,
+                 settings.CAT_JARD_RUNNING2_SPRITE_PATH,
+                 settings.CAT_JARD_RUNNING3_SPRITE_PATH,
+                 settings.CAT_JARD_RUNNING4_SPRITE_PATH,
+                 settings.CAT_JARD_RUNNING5_SPRITE_PATH], "cat_jard"
             )
         }
 
