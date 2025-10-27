@@ -8,6 +8,11 @@ class Button:
                  button_size=settings.BUTTON_SIZE,
                  center_x=False,
                  center_y=False):
+        self.size = 30
+        self.position = position
+        self.center_x = center_x
+        self.center_y = center_y
+        self.button_size = button_size
 
         if isinstance(content, str):
             font = pygame.font.Font(settings.FONT_PATH, size)
@@ -35,9 +40,20 @@ class Button:
             self.y + self.surface.get_height() / 2
         ))
 
+    def set_text(self, content):
+        font = pygame.font.Font(settings.FONT_PATH, self.size)
+        self.content = font.render(content, True, settings.TEXT_COLOR)
+        self.x, self.y = self.position
+        if self.center_x:
+            self.x = settings.WINDOW_SIZE[0] / 2 - self.button_size[0] / 2
+        if self.center_y:
+            self.y = settings.WINDOW_SIZE[1] / 2 - self.button_size[1] / 2
+        self.content_rect = self.content.get_rect(center=(self.x + self.button_size[0]/2, self.y + self.button_size[1]/2))
+
     def draw(self, screen):
         screen.blit(self.surface, (self.x, self.y))
         screen.blit(self.content, self.content_rect)
+        self.update()
 
     def update(self):
         mouse_pos = pygame.mouse.get_pos()

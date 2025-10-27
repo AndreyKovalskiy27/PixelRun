@@ -47,6 +47,7 @@ PLAYER_START_ANIMATION_SPRITE = 0
 PLAYER_STANDING_SPIRTE_PATH = os.path.join("assets", "images", "player", "player_standing.PNG")
 PLAYER_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "player", "player_running.PNG")
 PLAYER_RUNNING2_SPTIRE_PATH = os.path.join("assets", "images", "player", "player_running2.PNG")
+ANGRY_MUNCI_STANDING_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_standing.jpg")
 
 # Enemies
 TRIANGLE_ENEMY_SIZE = (100, 80)

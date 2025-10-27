@@ -4,6 +4,7 @@
 import pygame
 import settings
 from .timer import Timer
+from shop import ShopUtil
 
 
 class PlayerAnimation:
@@ -17,15 +18,20 @@ class PlayerAnimation:
         # For animation delay
         self.timer = Timer(settings.PLAYER_ANIMATION_DELAY)
         self.timer.start()
-        
+
+        self.load_sprites()
+
+    def load_sprites(self):
         # Loading sprites
+        shop_util = ShopUtil()
+        skin = shop_util.current_skin()
         player_size = settings.PLAYER_SIZE
         self.__standing_sprite = pygame.transform.scale(
-                                pygame.image.load(settings.PLAYER_STANDING_SPIRTE_PATH), player_size)
-        self.__running_sprites = [pygame.transform.scale(pygame.image.load(settings.PLAYER_RUNNING_SPRITE_PATH), player_size),
-                                pygame.transform.scale(pygame.image.load(settings.PLAYER_RUNNING2_SPTIRE_PATH), player_size)
+                                pygame.image.load(skin.sprites[0]), player_size)
+        self.__running_sprites = [pygame.transform.scale(pygame.image.load(skin.sprites[1]), player_size),
+                                pygame.transform.scale(pygame.image.load(skin.sprites[2]), player_size)
                                 ]
-
+ 
     def change_direction(self, direction):
         """Change player's direction"""
         if direction != "standing":

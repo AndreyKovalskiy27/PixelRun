@@ -3,7 +3,7 @@
 
 from ui import Button, Text
 from .shop_menu_items import ShopMenuItems
-from .shop_util import ShopUtil
+from .shop_menu_skins import ShopMenuSkins
 
 
 class ShopMenu:
@@ -19,22 +19,22 @@ class ShopMenu:
         # Other
         self.menu_type = "mainmenu"
         self.items_menu = ShopMenuItems(self.shop_util)
+        self.skins_menu = ShopMenuSkins(self.shop_util)
 
     def draw(self, screen, pygame_event):
         """Draw shop menu"""
         if self.menu_type == "mainmenu":
             self.title.draw(screen)
             self.button_items.draw(screen)
-            self.button_items.update()
-
             self.button_skins.draw(screen)
-            self.button_skins.update()
-
             self.button_back.draw(screen)
-            self.button_back.update()
 
             if self.button_items.is_clicked(pygame_event):
                 self.menu_type = "items"
+
+            elif self.button_skins.is_clicked(pygame_event):
+
+                self.menu_type = "skins"
 
             elif self.button_back.is_clicked(pygame_event):
                 return True
@@ -43,6 +43,14 @@ class ShopMenu:
             res = self.items_menu.draw(screen, pygame_event)
             if res:
                 self.menu_type = "mainmenu"
+
+        elif self.menu_type == "skins":
+            res = self.skins_menu.draw(screen, pygame_event)
+            if res == True:
+                self.menu_type = "mainmenu"
+
+            elif res == "skin_changed":
+                return res
 
         coins_conuter = Text((1400, 25), f"Coins: {self.shop_util.coins}", 30, color=(255, 255, 0))
         coins_conuter.draw(screen)

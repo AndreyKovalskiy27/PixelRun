@@ -91,11 +91,8 @@ class Game:
         self.player_object.draw(screen)
         self.levels_manager.draw(screen)
         self.back_btn.draw(screen)
-        self.back_btn.update()
         self.restart_btn.draw(screen)
-        self.restart_btn.update()
         self.use_shield_btn.draw(screen)
-        self.use_shield_btn.update()
         self.notifier.draw(screen)
         self.keyboard_handler(event)
 

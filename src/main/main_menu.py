@@ -48,17 +48,14 @@ class MainMenu:
     def draw_main_menu(self, screen, pygame_event):
         """Draw main menu"""
         self.button_copyright.draw(screen)
-        self.button_copyright.update()
 
         self.copyright.draw(screen)
 
         if not self.copyright.copyright_on:
             self.text2.draw(screen)
             self.press_enter_button.draw(screen)
-            self.press_enter_button.update()
 
             self.button_shop.draw(screen)
-            self.button_shop.update()
 
             if self.press_enter_button.is_clicked(pygame_event):
                 return "game"

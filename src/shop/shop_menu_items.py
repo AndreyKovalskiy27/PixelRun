@@ -37,16 +37,9 @@ class ShopMenuItems:
 
         self.title.draw(screen)
         self.button_back.draw(screen)
-        self.button_back.update()
-
         self.button_left.draw(screen)
-        self.button_left.update()
-
         self.button_right.draw(screen)
-        self.button_right.update()
-
         self.button_buy.draw(screen)
-        self.button_buy.update()
 
         self.text1.draw(screen)
         self.text2.draw(screen)
