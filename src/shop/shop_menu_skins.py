@@ -105,7 +105,6 @@ class ShopMenuSkins:
                 if not skin_obj.is_equiped:
                     self.shop_util.equip_skin(skin_obj.id)
                     self.notifier.show("skin_equiped")
-                    return "skin_changed"
     
                 else:
                     self.notifier.show("skin_is_already_equiped")

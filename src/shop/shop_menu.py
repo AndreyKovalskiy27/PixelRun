@@ -46,11 +46,8 @@ class ShopMenu:
 
         elif self.menu_type == "skins":
             res = self.skins_menu.draw(screen, pygame_event)
-            if res == True:
+            if res:
                 self.menu_type = "mainmenu"
-
-            elif res == "skin_changed":
-                return res
 
         coins_conuter = Text((1400, 25), f"Coins: {self.shop_util.coins}", 30, color=(255, 255, 0))
         coins_conuter.draw(screen)

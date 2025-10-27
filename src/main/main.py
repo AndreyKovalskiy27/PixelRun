@@ -81,9 +81,6 @@ class Main:
                 if res == True:
                     self.game_type = "mainmenu"
 
-                elif res == "skin_changed":
-                    self.game_menu.player_object.animation.load_sprites()
-
             elif self.game_type == "mainmenu":
                 # Music
                 self.play_music(settings.MENU_MUSIC_PATH)

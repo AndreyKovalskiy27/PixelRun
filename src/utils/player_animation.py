@@ -45,6 +45,8 @@ class PlayerAnimation:
     def current_sprite(self):
         """Get current player sprite"""
         # If player is standing
+        self.load_sprites()
+
         if self.__moving_status == "standing":
             # If player is faced to the right
             if self.__moving_direction == "right":
