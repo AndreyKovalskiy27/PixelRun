@@ -29,10 +29,36 @@ class CopyrightWindow:
                 self.copyright_box_y
             ))
 
+            self.text1.draw(screen)
             self.text2.draw(screen)
             self.text3.draw(screen)
             self.text4.draw(screen)
             self.text5.draw(screen)
+
+class SettingsWindow:
+    def __init__(self):
+        self.text1 = Text((550, 0), "PIXEL SETTINGS", 100, True)
+
+        self.settings_box = pygame.Surface((800, 600))
+        self.settings_box.fill((25, 25, 25))
+        self.settings_box_x = settings.WINDOW_SIZE[0] / 2 - self.settings_box.get_width() / 2
+        self.settings_box_y = settings.WINDOW_SIZE[1] / 2 - self.settings_box.get_height() / 2
+        self.settings_on = False
+
+        self.text2 = Text((0, 100), "Music volume", 60, True)
+        self.button_plus_music = Button((600, 150), "-", 30, (50, 50))
+
+    def draw(self, screen):
+        if self.settings_on:
+            screen.blit(self.settings_box, (
+                self.settings_box_x,
+                self.settings_box_y
+            ))
+
+            self.text1.draw(screen)
+            self.text2.draw(screen)
+            self.button_plus_music.draw(screen)
+
 
 class MainMenu:
     """Games main menu"""
@@ -44,15 +70,21 @@ class MainMenu:
         self.button_copyright = Button((10, 0), pygame.image.load(settings.COPYRIGHT_IMAGE_PATH),
                                        size=(150, 150), button_size=(200, 200), center_y=True)
 
+        self.button_settings = Button((1580, 0), pygame.image.load(settings.SETTINGS_IMAGE_PATH),
+                                       size=(150, 150), button_size=(200, 200), center_y=True)
+
         self.copyright = CopyrightWindow()
+        self.settings = SettingsWindow()
 
     def draw_main_menu(self, screen, pygame_event):
         """Draw main menu"""
         self.button_copyright.draw(screen)
+        self.button_settings.draw(screen)
 
         self.copyright.draw(screen)
+        self.settings.draw(screen)
 
-        if not self.copyright.copyright_on:
+        if not self.copyright.copyright_on and not self.settings.settings_on:
             self.text2.draw(screen)
             self.press_enter_button.draw(screen)
 
@@ -64,8 +96,15 @@ class MainMenu:
             elif self.button_shop.is_clicked(pygame_event):
                 return "shop"
 
-        else:
-            self.copyright.text1.draw(screen)
-
         if self.button_copyright.is_clicked(pygame_event):
             self.copyright.copyright_on = True if not self.copyright.copyright_on else False
+
+            if self.copyright.copyright_on:
+                self.settings.settings_on = False
+
+
+        elif self.button_settings.is_clicked(pygame_event):
+            self.settings.settings_on = True if not self.settings.settings_on else False
+
+            if self.settings.settings_on:
+                self.copyright.copyright_on = False
