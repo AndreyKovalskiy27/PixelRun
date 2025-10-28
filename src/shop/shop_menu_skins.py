@@ -77,7 +77,7 @@ class ShopMenuSkins:
             screen.blit(skin_image, (skin_image_x, skin_image_y))
             self.button_buy.draw(screen)
 
-            text1 = Text((0, skin_image_y - 50), skin_obj.title, 30, True)
+            text1 = Text((0, skin_image_y - 50), skin_obj.title, 50, True)
             text2 = Text((0, skin_image_y + 200), skin_obj.description, 30, True)
         
             text1.draw(screen)
