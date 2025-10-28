@@ -72,9 +72,11 @@ class Game:
 
             else:
                 self.notifier.show("no_shields")
+                SoundEffects.error()
 
         else:
             self.notifier.show("shield_is_active")
+            SoundEffects.error()
 
     def draw(self, screen, event):
         # Moving objects
@@ -87,6 +89,7 @@ class Game:
         res = self.levels_manager.update(self.player_object)
         if res and not self.shield.is_active:
             self.create_game_objects()
+            SoundEffects.death()
 
         self.shield.draw(screen)
 

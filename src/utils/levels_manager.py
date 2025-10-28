@@ -4,6 +4,7 @@
 import random
 import settings
 from utils import levels
+from utils.sound import SoundEffects
 
 
 class LevelsManager:
@@ -55,6 +56,7 @@ class LevelsManager:
 
             if res == "coin":
                 self.shop_util.add_coins()
+                SoundEffects.coin()
 
             elif res == "killed":
                 return True

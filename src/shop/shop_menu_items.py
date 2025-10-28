@@ -64,3 +64,4 @@ class ShopMenuItems:
             except:
                 self.bought_shield_message.hide()
                 self.fail_message.show()
+                SoundEffects.error()

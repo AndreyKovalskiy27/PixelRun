@@ -103,14 +103,17 @@ class ShopMenuSkins:
 
                 except:
                     self.notifier.show("not_enought_coins")
+                    SoundEffects.error()
     
             else:
                 if not skin_obj.is_equiped:
                     self.shop_util.equip_skin(skin_obj.id)
                     self.notifier.show("skin_equiped")
+                    SoundEffects.buy()
     
                 else:
                     self.notifier.show("skin_is_already_equiped")
+                    SoundEffects.error()
 
         elif self.button_back.is_clicked(event):
             return True

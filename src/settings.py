@@ -27,9 +27,10 @@ MESSAGE_LASTS_FOR = 3000
 # Sound effects
 BUTTON_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "button.mp3")
 BUY_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "buy_sound.mp3")
-COIN_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "button.mp3")
+COIN_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "coin.mp3")
 JUMP_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "jump.mp3")
 DEATH_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "rip.mp3")
+ERROR_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "error.mp3")
 
 # Buttons
 BUTTON_COLOR = (30, 30, 30)

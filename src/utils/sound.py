@@ -9,6 +9,7 @@ class SoundTracks:
         if SoundTracks._instance is not None:
             return
         self.current_music = None
+        self.positions = {}
         SoundTracks._instance = self
 
     @classmethod
@@ -18,14 +19,23 @@ class SoundTracks:
         return cls._instance
 
     @classmethod
-    def play_music(cls, path, volume=settings.MUSIC_VOLUME):
+    def play_music(cls, path, volume=None):
         inst = cls._get_instance()
+        if volume is None:
+            volume = settings.MUSIC_VOLUME
+
+        if inst.current_music is not None:
+            inst.positions[inst.current_music] = pygame.mixer.music.get_pos() / 1000
+
+        start_pos = inst.positions.get(path, 0)
+
         if inst.current_music == path:
             return
+
         pygame.mixer.music.stop()
         pygame.mixer.music.load(path)
         pygame.mixer.music.set_volume(volume)
-        pygame.mixer.music.play(-1)
+        pygame.mixer.music.play(-1, start=start_pos)
         inst.current_music = path
 
     @classmethod
@@ -60,4 +70,14 @@ class SoundEffects:
     @classmethod
     def coin(cls):
         sound = pygame.mixer.Sound(settings.COIN_SOUND_EFFECT_PATH)
+        sound.play()
+
+    @classmethod
+    def death(cls):
+        sound = pygame.mixer.Sound(settings.DEATH_SOUND_EFFECT_PATH)
+        sound.play()
+
+    @classmethod
+    def error(cls):
+        sound = pygame.mixer.Sound(settings.ERROR_SOUND_EFFECT_PATH)
         sound.play()
