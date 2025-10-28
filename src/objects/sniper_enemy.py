@@ -18,7 +18,6 @@ class SniperEnemy(Object):
 
         # Bullets
         self.last_update = 0
-        self.bullet_delay = settings.GameParams.BULLET_DELAY
         self.bullets = []
 
     def draw(self, screen):
@@ -45,7 +44,7 @@ class SniperEnemy(Object):
         # Checking if sniper enemy is on the screen
         if self.x <= settings.WINDOW_SIZE[0]:
             current_tick = pygame.time.get_ticks()
-            if current_tick - self.last_update > self.bullet_delay:
+            if current_tick - self.last_update > settings.GameParams.BULLET_DELAY:
                 bullet = Object((self.x, self.y))
                 bullet.surface = pygame.surface.Surface(settings.GameParams.BULLET_SIZE)
                 bullet.surface.fill(settings.BULLET_COLOR)
