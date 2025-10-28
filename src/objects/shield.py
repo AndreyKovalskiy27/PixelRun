@@ -1,7 +1,7 @@
 import math
 import pygame
 import settings
-from utils import Timer
+from utils.timer import Timer
 
 
 class Shield:

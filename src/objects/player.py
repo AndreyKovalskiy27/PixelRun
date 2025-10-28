@@ -4,7 +4,7 @@
 import pygame
 import settings
 from .object import Object
-from utils import PlayerAnimation
+from utils.player_animation import PlayerAnimation
 
 
 class Player(Object):
@@ -65,9 +65,7 @@ class Player(Object):
             if self.can_move_up:
                 self.velocity_y = -self.jump_strength  # Go up
                 self.on_ground = False
-
-                sound = pygame.mixer.Sound(settings.JUMP_SOUND_EFFECT_PATH)
-                sound.play()
+                return "jumped"
 
         if not moving:
             self.animation.change_direction("standing")

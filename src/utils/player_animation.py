@@ -1,7 +1,7 @@
 import pygame
 import settings
 from .timer import Timer
-from shop import ShopUtil
+from shop.shop_util import ShopUtil
 
 
 class PlayerAnimation:

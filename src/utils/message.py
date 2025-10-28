@@ -1,5 +1,5 @@
-from ui import Text
-from.timer import Timer
+from ui.text import Text
+from .timer import Timer
 import settings
 
 

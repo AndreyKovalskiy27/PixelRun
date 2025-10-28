@@ -1,7 +1,8 @@
 """Games main menu"""
 
 
-from ui import Button, Text
+from ui.button import Button
+from ui.text import Text
 import settings
 import pygame
 

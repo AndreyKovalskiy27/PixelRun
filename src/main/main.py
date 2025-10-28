@@ -3,12 +3,11 @@
 
 import settings
 import pygame
-from shop import ShopMenu
+from shop.shop_menu import ShopMenu
 from .main_menu import MainMenu
-from ui import Button
-from shop import ShopUtil
+from utils.sound import SoundTracks
+from shop.shop_util import ShopUtil
 from .game import Game
-from utils import Message
 
 
 class Main:
@@ -26,18 +25,6 @@ class Main:
 
         self.shop_util = ShopUtil()
         self.game_type = "mainmenu"
-        self.current_music = None
-
-    def play_music(self, path, volume=settings.MUSIC_VOLUME):
-        """Play background music safely"""
-        if self.current_music == path:
-            return
-
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load(path)
-        pygame.mixer.music.set_volume(volume)
-        pygame.mixer.music.play(-1)
-        self.current_music = path
 
     def mainloop(self):
         """Main loop of the game"""
@@ -71,20 +58,18 @@ class Main:
                                 self.game_menu.shield.timer.resume()
 
             if self.game_type == "game":
-                self.play_music(settings.GAME_MUSIC_PATH)
-
+                SoundTracks.game()
                 if self.game_menu.draw(self.screen, event):
                     self.game_type = "mainmenu"
 
             elif self.game_type == "shop":
-                self.play_music(settings.SHOP_MUSIC_PATH)
+                SoundTracks.shop()
                 res = self.shop_menu.draw(self.screen, event)
                 if res == True:
                     self.game_type = "mainmenu"
 
             elif self.game_type == "mainmenu":
-                # Music
-                self.play_music(settings.MENU_MUSIC_PATH)
+                SoundTracks.main_menu()
                 res = self.main_menu.draw_main_menu(self.screen, event)
                 if res:
                     self.game_type = res

@@ -1,6 +1,5 @@
 import pickle
 import settings
-import os
 from dataclasses import dataclass
 
 

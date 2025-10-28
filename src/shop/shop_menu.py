@@ -1,7 +1,8 @@
 """Shop's main menu"""
 
 
-from ui import Button, Text
+from ui.button import Button
+from ui.text import Text
 from .shop_menu_items import ShopMenuItems
 from .shop_menu_skins import ShopMenuSkins
 

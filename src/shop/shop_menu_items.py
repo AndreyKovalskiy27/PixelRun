@@ -3,8 +3,10 @@
 
 import pygame
 import settings
-from ui import Button, Text
-from utils import Message
+from ui.button import Button
+from ui.text import Text
+from utils.message import Message
+from utils.sound import SoundEffects
 
 
 class ShopMenuItems:
@@ -57,8 +59,7 @@ class ShopMenuItems:
                 self.shop_util.buy_shields()
                 self.fail_message.hide()
                 self.bought_shield_message.show()
-                sound = pygame.mixer.Sound(settings.BUY_SOUND_EFFECT_PATH)
-                sound.play()
+                SoundEffects.buy()
 
             except:
                 self.bought_shield_message.hide()

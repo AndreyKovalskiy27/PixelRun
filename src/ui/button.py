@@ -1,5 +1,6 @@
 import pygame
 import settings
+from utils.sound import SoundEffects
 
 
 class Button:
@@ -68,7 +69,6 @@ class Button:
             if e.type == pygame.MOUSEBUTTONDOWN and e.button == 1:
                 if self.button_rect.collidepoint(mouse_pos):
                     if play_sound:
-                        sound = pygame.mixer.Sound(settings.BUTTON_SOUND_EFFECT_PATH)
-                        sound.play()
+                        SoundEffects.button()
 
                     return True
