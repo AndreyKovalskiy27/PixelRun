@@ -7,13 +7,18 @@ import os
 # General
 WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
+
 MENU_MUSIC_PATH = os.path.join("assets", "sounds", "Menu.mp3")
 GAME_MUSIC_PATH = os.path.join("assets", "sounds", "Game.mp3")
 SHOP_MUSIC_PATH  = os.path.join("assets", "sounds", "Shop.mp3")
+
 SHIELD_IMAGE_PATH = os.path.join("assets", "images", "shield.png")
 COPYRIGHT_IMAGE_PATH = os.path.join("assets", "images", "copyright.png")
 SETTINGS_IMAGE_PATH = os.path.join("assets", "images", "settings.png")
+
 MUSIC_VOLUME = 0.5
+SOUND_EFFECTS_VOLUME = 1.0
+
 BASE_FPS = 60 # 0 for the max FPS
 SLOW_DOWN_FPS = 30
 ICON_IMAGE_PATH = os.path.join("assets", "images", "icon.jpg")
