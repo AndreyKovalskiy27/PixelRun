@@ -10,6 +10,7 @@ class SoundTracks:
             return
         self.current_music = None
         self.positions = {}
+        self.volume = settings.MUSIC_VOLUME
         SoundTracks._instance = self
 
     @classmethod
@@ -18,12 +19,11 @@ class SoundTracks:
             cls()
         return cls._instance
 
-    @classmethod
-    def play_music(cls, path, volume=None):
-        inst = cls._get_instance()
-        if volume is None:
-            volume = settings.MUSIC_VOLUME
 
+    @classmethod
+    def play_music(cls, path):
+        inst = cls._get_instance()
+        volume = inst.volume
         if inst.current_music is not None:
             inst.positions[inst.current_music] = pygame.mixer.music.get_pos() / 1000
 

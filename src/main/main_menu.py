@@ -3,6 +3,7 @@
 
 from ui.button import Button
 from ui.text import Text
+from utils.sound import SoundTracks, SoundEffects
 import settings
 import pygame
 
@@ -37,6 +38,7 @@ class CopyrightWindow:
 
 class SettingsWindow:
     def __init__(self):
+        self.music = SoundTracks._get_instance()
         self.text1 = Text((550, 0), "PIXEL SETTINGS", 100, True)
 
         self.settings_box = pygame.Surface((800, 600))
@@ -46,9 +48,11 @@ class SettingsWindow:
         self.settings_on = False
 
         self.text2 = Text((0, 100), "Music volume", 60, True)
-        self.button_plus_music = Button((600, 150), "-", 30, (50, 50))
+        self.music_volume = Text((0, 170), str(self.music.volume), 30, True)
+        self.button_minus_music = Button((650, 170), "-", 50, (75, 75))
+        self.button_plus_music = Button((1075, 170), "+", 50, (75, 75))
 
-    def draw(self, screen):
+    def draw(self, screen, event):
         if self.settings_on:
             screen.blit(self.settings_box, (
                 self.settings_box_x,
@@ -57,7 +61,19 @@ class SettingsWindow:
 
             self.text1.draw(screen)
             self.text2.draw(screen)
+            self.music_volume.draw(screen)
+            self.button_minus_music.draw(screen)
             self.button_plus_music.draw(screen)
+
+            if self.button_minus_music.is_clicked(event):
+                self.music.volume = max(0.0, round(self.music.volume - 0.1, 1))
+                pygame.mixer.music.set_volume(self.music.volume)
+                self.music_volume.change_text(str(self.music.volume))
+
+            elif self.button_plus_music.is_clicked(event):
+                self.music.volume = min(1.0, round(self.music.volume + 0.1, 1))
+                pygame.mixer.music.set_volume(self.music.volume)
+                self.music_volume.change_text(str(self.music.volume))
 
 
 class MainMenu:
@@ -82,7 +98,7 @@ class MainMenu:
         self.button_settings.draw(screen)
 
         self.copyright.draw(screen)
-        self.settings.draw(screen)
+        self.settings.draw(screen, pygame_event)
 
         if not self.copyright.copyright_on and not self.settings.settings_on:
             self.text2.draw(screen)
