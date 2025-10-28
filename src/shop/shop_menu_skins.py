@@ -4,9 +4,10 @@ from ui.button import Button
 from ui.text import Text
 from utils.message import Message
 from utils.sound import SoundEffects
+from utils.notifier import BaseNotifier
 
 
-class Notifier:
+class ShopSkinsNotifier(BaseNotifier):
     def __init__(self):
         self.not_enought_coins_message = Message("You don't have enought coins, loser", (255, 0, 0))
         self.skin_bought = Message("Skin succefly bought!", (0, 255, 0))
@@ -20,20 +21,6 @@ class Notifier:
             "skin_is_already_equiped": self.skin_is_equiped
         }
 
-    def show(self, id):
-        for msg_id, msg in self.messages_list.items():
-            if id == msg_id:
-                msg.show()
-
-            else:
-                msg.hide()
-
-    def draw(self, screen):
-        self.not_enought_coins_message.draw(screen)
-        self.skin_bought.draw(screen)
-        self.skin_equiped.draw(screen)
-        self.skin_is_equiped.draw(screen)
-
 
 class ShopMenuSkins:
     def __init__(self, shop_util):
@@ -44,7 +31,7 @@ class ShopMenuSkins:
         self.button_right = Button((1290, 0), ">", button_size=(100, 100), size=100, center_y=True)
         self.button_back = Button((10, 10), "<", button_size=(50, 50))
         self.current_skin = 0
-        self.notifier = Notifier()
+        self.notifier = ShopSkinsNotifier()
 
         self.skins = []
         for skin in self.shop_util.skin_base.values():

@@ -6,11 +6,12 @@ from ui.button import Button
 from objects.player import Player
 from objects.shield import Shield
 from utils.levels_manager import LevelsManager
-from utils.message import Message
 from utils.sound import SoundEffects
+from utils.notifier import BaseNotifier
+from utils.message import Message
 
 
-class GameNotifier:
+class GameNotifier(BaseNotifier):
     def __init__(self):
         self.no_shields_message = Message("You don't have shields", (255, 0, 0))
         self.shield_is_active_message = Message("Shield is already active", (255, 0, 0))
@@ -24,17 +25,6 @@ class GameNotifier:
             "game_restarted": self.game_restarted_message
         }
 
-    def draw(self, screen):
-        for message in self.messages_list.values():
-            message.draw(screen)
-
-    def show(self, message_to_show):
-        for message, message_object in self.messages_list.items():
-            if message != message_to_show:
-                message_object.hide()
-
-            elif message == message_to_show:
-                message_object.show()
 
 class Game:
     def __init__(self, shop_util):
