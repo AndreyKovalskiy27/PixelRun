@@ -31,7 +31,7 @@ class Player(Object):
 
     def move_with_background(self):
         """Move player with the background"""
-        super().move_left(settings.BACKGROUND_SPEED, True)
+        super().move_left(settings.GameParams.BACKGROUND_SPEED, True)
 
     def draw(self, screen):
         """Draw the player"""

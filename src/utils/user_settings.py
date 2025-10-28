@@ -3,6 +3,44 @@ import os
 
 
 SETTINGS_PATH = os.path.expanduser("~/.pixelsettings.json")
+DIFFICULTIES = {
+    "child": {
+        "background_speed": 2,
+        "triangle_enemy_size": (50, 80),
+        "bullet_speed": 5,
+        "bullet_delay": 5000,
+        "sniper_enemy_moving_speed": 5,
+        "bullet_size": (10, 10),
+        "name": "Child"
+    },
+    "normal": {
+        "background_speed": 3,
+        "triangle_enemy_size": (60, 90),
+        "bullet_speed": 10,
+        "bullet_delay": 2000,
+        "sniper_enemy_moving_speed": 7,
+        "bullet_size": (12, 12),
+        "name": "Normal"
+    },
+    "hard": {
+        "background_speed": 5,
+        "triangle_enemy_size": (70, 100),
+        "bullet_speed": 15,
+        "bullet_delay": 750,
+        "sniper_enemy_moving_speed": 10,
+        "bullet_size": (25, 25),
+        "name": "Hard"
+    },
+    "extreme": {
+        "background_speed": 6,
+        "triangle_enemy_size": (200, 180),
+        "bullet_speed": 20,
+        "bullet_delay": 500,
+        "sniper_enemy_moving_speed": 15,
+        "bullet_size": (50, 50),
+        "name": "EXTREME"
+    }
+}
 
 
 class UserSettings:
@@ -19,8 +57,25 @@ class UserSettings:
             base_settings =  self.settings = {
                 "music_volume": 0.5,
                 "sound_effects_volume": 1.0,
+                "difficulty": DIFFICULTIES["hard"]
             }
             return base_settings
+
+    def set_difficulty_to_settings(self):
+        from settings import GameParams
+        difficulty = self.difficulty
+        GameParams.BACKGROUND_SPEED =  self.settings["difficulty"]["background_speed"]
+        GameParams.BULLET_DELAY =  self.settings["difficulty"]["bullet_delay"]
+        GameParams.BULLET_SIZE = self.settings["difficulty"]["bullet_size"]
+        GameParams.BULLET_SPEED =  self.settings["difficulty"]["bullet_speed"]
+        GameParams.SNIPER_ENEMY_MOVING_SPEED =  self.settings["difficulty"]["sniper_enemy_moving_speed"]
+        GameParams.TRIANGLE_ENEMY_SIZE =  self.settings["difficulty"]["triangle_enemy_size"]
+
+
+    def set_difficulty(self, difficulty):
+        self.settings["difficulty"] = DIFFICULTIES[difficulty]
+        self.save()
+        self.set_difficulty_to_settings()
 
     def save(self):
         with open(SETTINGS_PATH, "wb") as file:
@@ -41,3 +96,7 @@ class UserSettings:
     @property
     def sound_effects_volume(self):
         return self.settings["sound_effects_volume"]
+
+    @property
+    def difficulty(self):
+        return self.settings["difficulty"]["name"]

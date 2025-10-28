@@ -32,6 +32,23 @@ class SettingsWindow:
         self.button_minus_sound_effects = Button((650, 340), "-", 50, (75, 75))
         self.button_plus_sound_effects = Button((1075, 340), "+", 50, (75, 75))
 
+        # Difficulty
+        self.difficulties_text = {
+            "child": Text((0, 525), "Child", 50, True, color=(0, 255, 0)),
+            "normal": Text((0, 525), "Normal", 50, True, color=(0, 255, 0)),
+            "hard": Text((0, 525), "Hard", 50, True, color=(255, 255, 0)),
+            "extreme": Text((0, 525), "EXTREME", 50, True, color=(255, 0, 0)),
+        }
+        self.difficulties = {
+            0: "child",
+            1: "normal",
+            2: "hard",
+            3: "extreme"
+        }
+        self.text4 = Text((0, 440), "Difficulty", 60, True)
+        self.button_minus_difficulty = Button((650, 510), "-", 50, (75, 75))
+        self.button_plus_difficulty = Button((1075, 510), "+", 50, (75, 75))
+ 
     def draw(self, screen, event):
         if self.settings_on:
             screen.blit(self.settings_box, (
@@ -49,6 +66,12 @@ class SettingsWindow:
             self.sound_effects_volume.draw(screen)
             self.button_minus_sound_effects.draw(screen)
             self.button_plus_sound_effects.draw(screen)
+
+            self.text4.draw(screen)
+            self.button_minus_difficulty.draw(screen)
+            self.button_plus_difficulty.draw(screen)
+
+            self.difficulties_text[self.user_settings.difficulty.lower()].draw(screen)
 
             if self.button_minus_music.is_clicked(event):
                 self.music.volume = max(0.0, round(self.music.volume - 0.1, 1))
@@ -71,3 +94,17 @@ class SettingsWindow:
                 self.effects.volume = min(1.0, round(self.effects.volume + 0.1, 1))
                 self.user_settings.set_sound_effects_volume(self.effects.volume)
                 self.sound_effects_volume.change_text(str(self.effects.volume))
+
+            elif self.button_minus_difficulty.is_clicked(event):
+                current_index = list(self.difficulties.keys())[list(self.difficulties.values()).index(self.user_settings.difficulty.lower())]
+                new_index = max(0, current_index - 1)
+                new_difficulty = self.difficulties[new_index]
+                self.user_settings.set_difficulty(new_difficulty)
+                self.difficulties_text[new_difficulty].draw(screen)
+
+            elif self.button_plus_difficulty.is_clicked(event):
+                current_index = list(self.difficulties.keys())[list(self.difficulties.values()).index(self.user_settings.difficulty.lower())]
+                new_index = min(len(self.difficulties) - 1, current_index + 1)
+                new_difficulty = self.difficulties[new_index]
+                self.user_settings.set_difficulty(new_difficulty)
+                self.difficulties_text[new_difficulty].draw(screen)

@@ -18,7 +18,7 @@ class SniperEnemy(Object):
 
         # Bullets
         self.last_update = 0
-        self.bullet_delay = settings.BULLET_DELAY
+        self.bullet_delay = settings.GameParams.BULLET_DELAY
         self.bullets = []
 
     def draw(self, screen):
@@ -47,7 +47,7 @@ class SniperEnemy(Object):
             current_tick = pygame.time.get_ticks()
             if current_tick - self.last_update > self.bullet_delay:
                 bullet = Object((self.x, self.y))
-                bullet.surface = pygame.surface.Surface(settings.BULLET_SIZE)
+                bullet.surface = pygame.surface.Surface(settings.GameParams.BULLET_SIZE)
                 bullet.surface.fill(settings.BULLET_COLOR)
                 self.bullets.append(bullet)
                 self.last_update = current_tick
@@ -57,18 +57,18 @@ class SniperEnemy(Object):
         # Updating bullets
         self.shot()
         for bullet in self.bullets:
-            bullet.move_left(settings.BULLET_SPEED)
+            bullet.move_left(settings.GameParams.BULLET_SPEED)
             if bullet.x + bullet.surface.get_width() < 0:
                 self.bullets.remove(bullet)
 
         # Moving sniper enemy
         if self.moving_direction == "up":
-            self.move_up(settings.SNIPER_ENEMY_MOVING_SPEED, True)
+            self.move_up(settings.GameParams.SNIPER_ENEMY_MOVING_SPEED, True)
             if self.y <= 0:
                 self.moving_direction = "down"
 
         elif self.moving_direction == "down":
-            self.move_down(settings.SNIPER_ENEMY_MOVING_SPEED, True)
+            self.move_down(settings.GameParams.SNIPER_ENEMY_MOVING_SPEED, True)
 
             if self.y + self.surface.get_height() >= settings.GROUND_LIMIT:
                 self.moving_direction = "up"

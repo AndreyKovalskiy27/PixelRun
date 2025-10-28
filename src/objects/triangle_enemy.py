@@ -11,7 +11,7 @@ class TriangleEnemy(Object):
     def __init__(self, position):
         super().__init__(position)
 
-        width, height = settings.TRIANGLE_ENEMY_SIZE
+        width, height = settings.GameParams.TRIANGLE_ENEMY_SIZE
         color = settings.TRIANGLE_ENEMY_COLOR
 
         self.surface = pygame.Surface((width, height), pygame.SRCALPHA)

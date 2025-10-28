@@ -8,6 +8,15 @@ from utils.user_settings import UserSettings
 users_settings = UserSettings()
 
 
+class GameParams:
+    BACKGROUND_SPEED =  users_settings.settings["difficulty"]["background_speed"]
+    BULLET_DELAY =  users_settings.settings["difficulty"]["bullet_delay"]
+    BULLET_SIZE = users_settings.settings["difficulty"]["bullet_size"]
+    BULLET_SPEED =  users_settings.settings["difficulty"]["bullet_speed"]
+    SNIPER_ENEMY_MOVING_SPEED =  users_settings.settings["difficulty"]["sniper_enemy_moving_speed"]
+    TRIANGLE_ENEMY_SIZE =  users_settings.settings["difficulty"]["triangle_enemy_size"]
+
+
 # General
 WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
@@ -48,8 +57,6 @@ BUTTON_COLOR = (30, 30, 30)
 BUTTON_SIZE = (500, 150)
 BUTTON_CURSOR_COLOR = (70, 70, 70)
 
-# Background
-BACKGROUND_SPEED = 3
 
 # PLayer
 PLAYER_SIZE = (80, 100)
@@ -80,17 +87,12 @@ CAT_JARD_RUNNING4_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "ca
 CAT_JARD_RUNNING5_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running5.PNG")
 
 # Enemies
-TRIANGLE_ENEMY_SIZE = (100, 80)
 TRIANGLE_ENEMY_COLOR = (255, 0, 255)
 SNIPER_ENEMY_COLOR = (150, 0, 0)
-SNIPER_ENEMY_SIZE = (200, 50)
-SNIPER_ENEMY_MOVING_SPEED = 10
 
 # Bullets
-BULLET_SIZE = (50, 10)
+SNIPER_ENEMY_SIZE = (200, 50)
 BULLET_COLOR = (150, 0, 0)
-BULLET_SPEED = 10
-BULLET_DELAY = 1000
 
 PLATFORM_SIZE = (200, 50)
 PLATFORM_COLOR = (0, 255, 155)

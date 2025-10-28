@@ -21,7 +21,7 @@ class Object:
 
     def move_with_background(self, check_borders = False):
         """Move the object with the background"""
-        self.move_left(settings.BACKGROUND_SPEED, check_borders)
+        self.move_left(settings.GameParams.BACKGROUND_SPEED, check_borders)
 
     def move_right(self, speed, check_borders = False):
         """Move object to the right"""
