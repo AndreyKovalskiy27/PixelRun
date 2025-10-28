@@ -2,6 +2,7 @@ import pygame
 from utils.sound import SoundTracks, SoundEffects
 from ui.button import Button
 from ui.text import Text
+from utils.user_settings import UserSettings
 import settings
 
 
@@ -9,6 +10,7 @@ class SettingsWindow:
     def __init__(self):
         self.music = SoundTracks._get_instance()
         self.effects = SoundEffects._get_instance()
+        self.user_settings = UserSettings()
 
         self.text1 = Text((550, 0), "PIXEL SETTINGS", 100, True)
 
@@ -51,17 +53,21 @@ class SettingsWindow:
             if self.button_minus_music.is_clicked(event):
                 self.music.volume = max(0.0, round(self.music.volume - 0.1, 1))
                 pygame.mixer.music.set_volume(self.music.volume)
+                self.user_settings.set_music_volume(self.music.volume)
                 self.music_volume.change_text(str(self.music.volume))
 
             elif self.button_plus_music.is_clicked(event):
                 self.music.volume = min(1.0, round(self.music.volume + 0.1, 1))
                 pygame.mixer.music.set_volume(self.music.volume)
+                self.user_settings.set_music_volume(self.music.volume)
                 self.music_volume.change_text(str(self.music.volume))
 
             elif self.button_minus_sound_effects.is_clicked(event):
                 self.effects.volume = max(0.0, round(self.effects.volume - 0.1, 1))
+                self.user_settings.set_sound_effects_volume(self.effects.volume)
                 self.sound_effects_volume.change_text(str(self.effects.volume))
 
             elif self.button_plus_sound_effects.is_clicked(event):
                 self.effects.volume = min(1.0, round(self.effects.volume + 0.1, 1))
+                self.user_settings.set_sound_effects_volume(self.effects.volume)
                 self.sound_effects_volume.change_text(str(self.effects.volume))

@@ -2,6 +2,10 @@
 
 
 import os
+from utils.user_settings import UserSettings
+
+
+users_settings = UserSettings()
 
 
 # General
@@ -16,8 +20,8 @@ SHIELD_IMAGE_PATH = os.path.join("assets", "images", "shield.png")
 COPYRIGHT_IMAGE_PATH = os.path.join("assets", "images", "copyright.png")
 SETTINGS_IMAGE_PATH = os.path.join("assets", "images", "settings.png")
 
-MUSIC_VOLUME = 0.5
-SOUND_EFFECTS_VOLUME = 1.0
+MUSIC_VOLUME = users_settings.music_volume
+SOUND_EFFECTS_VOLUME = users_settings.sound_effects_volume
 
 BASE_FPS = 60 # 0 for the max FPS
 SLOW_DOWN_FPS = 30
@@ -26,9 +30,10 @@ FONT_PATH = os.path.join("assets", "fonts", "GameFont.ttf")
 GROUND_LIMIT = WINDOW_SIZE[1]
 TEXT_COLOR = (255, 255, 255)
 LEVELS_ON_THE_SCREEN = 3
-SHOP_PATH = os.path.expanduser("~/.pixelshop.json")
 SHIELD_LASTS_FOR = 10000
 MESSAGE_LASTS_FOR = 3000
+
+SHOP_PATH = os.path.expanduser("~/.pixelshop.json")
 
 # Sound effects
 BUTTON_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "button.mp3")
