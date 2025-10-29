@@ -3,9 +3,7 @@
 
 from ui.button import Button
 from ui.text import Text
-from windows.copyright import CopyrightWindow
-from windows.settings_window import SettingsWindow
-from windows.how_to_play import HowToPlayWindow
+from windows.windows_manager import WindowsManager
 import settings
 import pygame
 
@@ -24,9 +22,7 @@ class MainMenu:
                                        size=(150, 150), button_size=(200, 200), center_y=True)
 
         self.button_how_to_play = Button((1580, 580), "?", 100, (200, 200))
-        self.copyright = CopyrightWindow()
-        self.settings = SettingsWindow()
-        self.how_to_play = HowToPlayWindow()
+        self.windows_manager = WindowsManager()
 
     def draw_main_menu(self, screen, pygame_event):
         """Draw main menu"""
@@ -34,11 +30,9 @@ class MainMenu:
         self.button_settings.draw(screen)
         self.button_how_to_play.draw(screen)
 
-        self.copyright.draw(screen)
-        self.settings.draw(screen, pygame_event)
-        self.how_to_play.draw(screen)
+        self.windows_manager.draw(screen, pygame_event)
 
-        if not self.copyright.is_on and not self.settings.is_on and not self.how_to_play.is_on:
+        if not self.windows_manager.is_a_window_active():
             self.text2.draw(screen)
             self.press_enter_button.draw(screen)
 
@@ -51,22 +45,10 @@ class MainMenu:
                 return "shop"
 
         if self.button_copyright.is_clicked(pygame_event):
-            self.copyright.is_on = True if not self.copyright.is_on else False
-
-            if self.copyright.is_on:
-                self.settings.is_on = False
-                self.how_to_play.is_on = False
+            self.windows_manager.show_or_hide_copyright()
 
         elif self.button_settings.is_clicked(pygame_event):
-            self.settings.is_on = True if not self.settings.is_on else False
-
-            if self.settings.is_on:
-                self.copyright.is_on = False
-                self.how_to_play.is_on = False
+            self.windows_manager.show_or_hide_settings()
 
         elif self.button_how_to_play.is_clicked(pygame_event):
-            self.how_to_play.is_on = True if not self.how_to_play.is_on else False
-
-            if self.how_to_play.is_on:
-                self.copyright.is_on = False
-                self.settings.is_on = False
+            self.windows_manager.show_or_hide_how_to_play()
