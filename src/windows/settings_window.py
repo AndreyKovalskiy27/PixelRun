@@ -3,22 +3,17 @@ from utils.sound import SoundTracks, SoundEffects
 from ui.button import Button
 from ui.text import Text
 from utils.user_settings import UserSettings
-import settings
+from .window import BaseWindow
 
 
-class SettingsWindow:
+class SettingsWindow(BaseWindow):
     def __init__(self):
+        super().__init__()
         self.music = SoundTracks._get_instance()
         self.effects = SoundEffects._get_instance()
         self.user_settings = UserSettings()
 
         self.text1 = Text((550, 0), "PIXEL SETTINGS", 100, True)
-
-        self.settings_box = pygame.Surface((800, 600))
-        self.settings_box.fill((25, 25, 25))
-        self.settings_box_x = settings.WINDOW_SIZE[0] / 2 - self.settings_box.get_width() / 2
-        self.settings_box_y = settings.WINDOW_SIZE[1] / 2 - self.settings_box.get_height() / 2
-        self.settings_on = False
 
         # Music
         self.text2 = Text((0, 100), "Music volume", 60, True)
@@ -50,12 +45,9 @@ class SettingsWindow:
         self.button_plus_difficulty = Button((1075, 510), "+", 50, (75, 75))
  
     def draw(self, screen, event):
-        if self.settings_on:
-            screen.blit(self.settings_box, (
-                self.settings_box_x,
-                self.settings_box_y
-            ))
+        super().draw(screen)
 
+        if self.is_on:
             self.text1.draw(screen)
             self.text2.draw(screen)
             self.music_volume.draw(screen)

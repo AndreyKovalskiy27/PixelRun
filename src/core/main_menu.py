@@ -33,7 +33,7 @@ class MainMenu:
         self.copyright.draw(screen)
         self.settings.draw(screen, pygame_event)
 
-        if not self.copyright.copyright_on and not self.settings.settings_on:
+        if not self.copyright.is_on and not self.settings.is_on:
             self.text2.draw(screen)
             self.press_enter_button.draw(screen)
 
@@ -46,14 +46,14 @@ class MainMenu:
                 return "shop"
 
         if self.button_copyright.is_clicked(pygame_event):
-            self.copyright.copyright_on = True if not self.copyright.copyright_on else False
+            self.copyright.is_on = True if not self.copyright.is_on else False
 
-            if self.copyright.copyright_on:
-                self.settings.settings_on = False
+            if self.copyright.is_on:
+                self.settings.is_on = False
 
 
         elif self.button_settings.is_clicked(pygame_event):
-            self.settings.settings_on = True if not self.settings.settings_on else False
+            self.settings.is_on = True if not self.settings.is_on else False
 
-            if self.settings.settings_on:
-                self.copyright.copyright_on = False
+            if self.settings.is_on:
+                self.copyright.is_on = False

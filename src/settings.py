@@ -9,13 +9,13 @@ users_settings = UserSettings()
 
 
 class GameParams:
-    PLAYER_SPEED = users_settings.settings["difficulty"]["player_speed"]
-    BACKGROUND_SPEED =  users_settings.settings["difficulty"]["background_speed"]
-    BULLET_DELAY =  users_settings.settings["difficulty"]["bullet_delay"]
-    BULLET_SIZE = users_settings.settings["difficulty"]["bullet_size"]
-    BULLET_SPEED =  users_settings.settings["difficulty"]["bullet_speed"]
-    SNIPER_ENEMY_MOVING_SPEED =  users_settings.settings["difficulty"]["sniper_enemy_moving_speed"]
-    TRIANGLE_ENEMY_SIZE =  users_settings.settings["difficulty"]["triangle_enemy_size"]
+    PLAYER_SPEED = users_settings.difficulty_params["player_speed"]
+    BACKGROUND_SPEED =  users_settings.difficulty_params["background_speed"]
+    BULLET_DELAY =  users_settings.difficulty_params["bullet_delay"]
+    BULLET_SIZE = users_settings.difficulty_params["bullet_size"]
+    BULLET_SPEED =  users_settings.difficulty_params["bullet_speed"]
+    SNIPER_ENEMY_MOVING_SPEED =  users_settings.difficulty_params["sniper_enemy_moving_speed"]
+    TRIANGLE_ENEMY_SIZE =  users_settings.difficulty_params["triangle_enemy_size"]
 
 
 # General

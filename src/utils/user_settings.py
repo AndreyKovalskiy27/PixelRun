@@ -21,7 +21,7 @@ DIFFICULTIES = {
         "bullet_delay": 2000,
         "sniper_enemy_moving_speed": 7,
         "bullet_size": (12, 12),
-        "player_speed": 10,
+        "player_speed": 11,
         "name": "Normal"
     },
     "hard": {
@@ -31,7 +31,7 @@ DIFFICULTIES = {
         "bullet_delay": 750,
         "sniper_enemy_moving_speed": 10,
         "bullet_size": (25, 25),
-        "player_speed": 10,
+        "player_speed": 13,
         "name": "Hard"
     },
     "extreme": {
@@ -41,7 +41,7 @@ DIFFICULTIES = {
         "bullet_delay": 500,
         "sniper_enemy_moving_speed": 15,
         "bullet_size": (50, 50),
-        "player_speed": 10,
+        "player_speed": 100,
         "name": "EXTREME"
     }
 }
@@ -61,22 +61,22 @@ class UserSettings:
             base_settings =  self.settings = {
                 "music_volume": 0.5,
                 "sound_effects_volume": 1.0,
-                "difficulty": DIFFICULTIES["normal"]
+                "difficulty": DIFFICULTIES["normal"]["name"]
             }
             return base_settings
 
     def set_difficulty_to_settings(self):
         from settings import GameParams
-        GameParams.BACKGROUND_SPEED =  self.settings["difficulty"]["background_speed"]
-        GameParams.BULLET_DELAY =  self.settings["difficulty"]["bullet_delay"]
-        GameParams.BULLET_SIZE = self.settings["difficulty"]["bullet_size"]
-        GameParams.BULLET_SPEED =  self.settings["difficulty"]["bullet_speed"]
-        GameParams.SNIPER_ENEMY_MOVING_SPEED =  self.settings["difficulty"]["sniper_enemy_moving_speed"]
-        GameParams.TRIANGLE_ENEMY_SIZE =  self.settings["difficulty"]["triangle_enemy_size"]
+        GameParams.BACKGROUND_SPEED =  self.difficulty_params["background_speed"]
+        GameParams.BULLET_DELAY =  self.difficulty_params["bullet_delay"]
+        GameParams.BULLET_SIZE = self.difficulty_params["bullet_size"]
+        GameParams.BULLET_SPEED =  self.difficulty_params["bullet_speed"]
+        GameParams.SNIPER_ENEMY_MOVING_SPEED =  self.difficulty_params["sniper_enemy_moving_speed"]
+        GameParams.TRIANGLE_ENEMY_SIZE =  self.difficulty_params["triangle_enemy_size"]
 
 
     def set_difficulty(self, difficulty):
-        self.settings["difficulty"] = DIFFICULTIES[difficulty]
+        self.settings["difficulty"] = DIFFICULTIES[difficulty]["name"]
         self.save()
         self.set_difficulty_to_settings()
 
@@ -102,4 +102,8 @@ class UserSettings:
 
     @property
     def difficulty(self):
-        return self.settings["difficulty"]["name"]
+        return self.settings["difficulty"]
+
+    @property
+    def difficulty_params(self):
+        return DIFFICULTIES[self.difficulty.lower()]
