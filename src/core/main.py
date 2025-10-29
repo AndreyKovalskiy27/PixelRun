@@ -6,7 +6,7 @@ import pygame
 from shop.shop_menu import ShopMenu
 from .main_menu import MainMenu
 from utils.sound import SoundTracks
-from shop.shop_util import ShopUtil
+from utils.storage.shop_util import ShopUtil
 from .game import Game
 
 

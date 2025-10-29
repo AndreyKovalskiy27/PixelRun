@@ -2,7 +2,7 @@ import pygame
 from utils.sound import SoundTracks, SoundEffects
 from ui.button import Button
 from ui.text import Text
-from utils.user_settings import UserSettings
+from utils.storage.user_settings import UserSettings
 from .window import BaseWindow
 
 

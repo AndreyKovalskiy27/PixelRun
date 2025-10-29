@@ -2,7 +2,7 @@
 
 
 import os
-from utils.user_settings import UserSettings
+from utils.storage.user_settings import UserSettings
 
 
 users_settings = UserSettings()
