@@ -55,7 +55,7 @@ class LevelsManager:
             res = level.update(player)
 
             if res == "coin":
-                self.shop_util.add_coins(1 * settings.GameParams.COINS_INCREASE)
+                self.shop_util.add_coins(settings.GameParams.COINS_INCREASE)
                 SoundEffects.coin()
 
             elif res == "killed":
