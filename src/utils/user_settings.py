@@ -41,7 +41,7 @@ DIFFICULTIES = {
         "bullet_delay": 500,
         "sniper_enemy_moving_speed": 15,
         "bullet_size": (50, 50),
-        "player_speed": 100,
+        "player_speed": 17,
         "name": "EXTREME"
     }
 }
