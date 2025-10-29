@@ -30,6 +30,7 @@ SHOP_MUSIC_PATH  = os.path.join("assets", "sounds", "Shop.mp3")
 SHIELD_IMAGE_PATH = os.path.join("assets", "images", "shield.png")
 COPYRIGHT_IMAGE_PATH = os.path.join("assets", "images", "copyright.png")
 SETTINGS_IMAGE_PATH = os.path.join("assets", "images", "settings.png")
+MUSIC_IMAGE_PATH = os.path.join("assets", "images", "music.png")
 
 MUSIC_VOLUME = users_settings.music_volume
 SOUND_EFFECTS_VOLUME = users_settings.sound_effects_volume
@@ -44,7 +45,9 @@ LEVELS_ON_THE_SCREEN = 3
 SHIELD_LASTS_FOR = 10000
 MESSAGE_LASTS_FOR = 3000
 
-SHOP_PATH = os.path.expanduser("~/.pixelshop.json")
+SHOP_PATH = os.path.expanduser("~/.pixelshop")
+USERS_MUSIC_PATH =os.path.expanduser("~/.pixelmusic.json")
+MAX_SONGS = 5
 
 # Sound effects
 BUTTON_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "button.mp3")

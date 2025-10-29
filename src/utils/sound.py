@@ -1,5 +1,6 @@
 import pygame
 import settings
+from .storage.users_music import UsersMusic
 
 
 class SoundTracks:
@@ -11,6 +12,7 @@ class SoundTracks:
         self.current_music = None
         self.positions = {}
         self.volume = settings.MUSIC_VOLUME
+        self.users_music = UsersMusic()
         SoundTracks._instance = self
 
     @classmethod
@@ -48,7 +50,8 @@ class SoundTracks:
 
     @classmethod
     def game(cls):
-        cls.play_music(settings.GAME_MUSIC_PATH)
+        instance = cls._get_instance()
+        cls.play_music(instance.users_music.choose_random())
 
 
 class SoundEffects:
