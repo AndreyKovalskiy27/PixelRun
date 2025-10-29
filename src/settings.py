@@ -9,6 +9,7 @@ users_settings = UserSettings()
 
 
 class GameParams:
+    COINS_INCREASE = users_settings.difficulty_params["coins_increase"]
     PLAYER_SPEED = users_settings.difficulty_params["player_speed"]
     BACKGROUND_SPEED =  users_settings.difficulty_params["background_speed"]
     BULLET_DELAY =  users_settings.difficulty_params["bullet_delay"]

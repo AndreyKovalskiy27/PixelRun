@@ -11,8 +11,9 @@ DIFFICULTIES = {
         "bullet_delay": 5000,
         "sniper_enemy_moving_speed": 5,
         "bullet_size": (10, 10),
-        "player_speed": 10,
-        "name": "Child"
+        "player_speed": 12,
+        "name": "child",
+        "coins_increase": 0.0,
     },
     "normal": {
         "background_speed": 3,
@@ -21,8 +22,9 @@ DIFFICULTIES = {
         "bullet_delay": 2000,
         "sniper_enemy_moving_speed": 7,
         "bullet_size": (12, 12),
-        "player_speed": 11,
-        "name": "Normal"
+        "player_speed": 13,
+        "name": "normal",
+        "coins_increase": 1
     },
     "hard": {
         "background_speed": 5,
@@ -31,8 +33,10 @@ DIFFICULTIES = {
         "bullet_delay": 750,
         "sniper_enemy_moving_speed": 10,
         "bullet_size": (25, 25),
-        "player_speed": 13,
-        "name": "Hard"
+        "player_speed": 15,
+        "name": "hard",
+        "coins_increase": 2
+
     },
     "extreme": {
         "background_speed": 6,
@@ -41,8 +45,9 @@ DIFFICULTIES = {
         "bullet_delay": 500,
         "sniper_enemy_moving_speed": 15,
         "bullet_size": (50, 50),
-        "player_speed": 17,
-        "name": "EXTREME"
+        "player_speed": 16,
+        "name": "extreme",
+        "coins_increase": 5,
     }
 }
 
@@ -73,6 +78,7 @@ class UserSettings:
         GameParams.BULLET_SPEED =  self.difficulty_params["bullet_speed"]
         GameParams.SNIPER_ENEMY_MOVING_SPEED =  self.difficulty_params["sniper_enemy_moving_speed"]
         GameParams.TRIANGLE_ENEMY_SIZE =  self.difficulty_params["triangle_enemy_size"]
+        GameParams.COINS_INCREASE =  self.difficulty_params["coins_increase"]
 
 
     def set_difficulty(self, difficulty):
@@ -106,4 +112,4 @@ class UserSettings:
 
     @property
     def difficulty_params(self):
-        return DIFFICULTIES[self.difficulty.lower()]
+        return DIFFICULTIES[self.difficulty]

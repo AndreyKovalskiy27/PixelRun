@@ -24,7 +24,8 @@ Settings:
 You can change music's and sound effects
 volume in settings.
 Also just for fun you can chose game
-difficulties! (Child, Normal, Hard, EXTREME)
+difficulties! (Child, Normal, Hard, EXTREME).
+Higher difficulty = More coins!
 """
         self.text_rendered = Text((540, 130), self.text, 25)
         self.text1 = Text((0, 100), "How to play", 30, True)
