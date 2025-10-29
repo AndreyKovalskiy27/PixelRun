@@ -11,6 +11,7 @@ DIFFICULTIES = {
         "bullet_delay": 5000,
         "sniper_enemy_moving_speed": 5,
         "bullet_size": (10, 10),
+        "player_speed": 10,
         "name": "Child"
     },
     "normal": {
@@ -20,6 +21,7 @@ DIFFICULTIES = {
         "bullet_delay": 2000,
         "sniper_enemy_moving_speed": 7,
         "bullet_size": (12, 12),
+        "player_speed": 10,
         "name": "Normal"
     },
     "hard": {
@@ -29,6 +31,7 @@ DIFFICULTIES = {
         "bullet_delay": 750,
         "sniper_enemy_moving_speed": 10,
         "bullet_size": (25, 25),
+        "player_speed": 10,
         "name": "Hard"
     },
     "extreme": {
@@ -38,6 +41,7 @@ DIFFICULTIES = {
         "bullet_delay": 500,
         "sniper_enemy_moving_speed": 15,
         "bullet_size": (50, 50),
+        "player_speed": 10,
         "name": "EXTREME"
     }
 }
@@ -57,13 +61,12 @@ class UserSettings:
             base_settings =  self.settings = {
                 "music_volume": 0.5,
                 "sound_effects_volume": 1.0,
-                "difficulty": DIFFICULTIES["hard"]
+                "difficulty": DIFFICULTIES["normal"]
             }
             return base_settings
 
     def set_difficulty_to_settings(self):
         from settings import GameParams
-        difficulty = self.difficulty
         GameParams.BACKGROUND_SPEED =  self.settings["difficulty"]["background_speed"]
         GameParams.BULLET_DELAY =  self.settings["difficulty"]["bullet_delay"]
         GameParams.BULLET_SIZE = self.settings["difficulty"]["bullet_size"]

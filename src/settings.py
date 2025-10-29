@@ -9,6 +9,7 @@ users_settings = UserSettings()
 
 
 class GameParams:
+    PLAYER_SPEED = users_settings.settings["difficulty"]["player_speed"]
     BACKGROUND_SPEED =  users_settings.settings["difficulty"]["background_speed"]
     BULLET_DELAY =  users_settings.settings["difficulty"]["bullet_delay"]
     BULLET_SIZE = users_settings.settings["difficulty"]["bullet_size"]
@@ -60,7 +61,6 @@ BUTTON_CURSOR_COLOR = (70, 70, 70)
 
 # PLayer
 PLAYER_SIZE = (80, 100)
-PLAYER_SPEED = 10
 PLAYER_BASE_POSITION = (0, 560)
 
 # Player physics

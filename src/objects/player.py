@@ -49,14 +49,14 @@ class Player(Object):
         if pressed_keys[pygame.K_a] or pressed_keys[pygame.K_LEFT]:
             if self.can_move_left:
                 if self.x > 0:
-                    self.move_left(settings.PLAYER_SPEED, True)
+                    self.move_left(settings.GameParams.PLAYER_SPEED, True)
                     self.animation.change_direction("left")
                     moving = True
 
         # Move right
         if pressed_keys[pygame.K_d] or pressed_keys[pygame.K_RIGHT]:
             if self.can_move_right:
-                self.move_right(settings.PLAYER_SPEED, True)
+                self.move_right(settings.GameParams.PLAYER_SPEED, True)
                 self.animation.change_direction("right")
                 moving = True
 
