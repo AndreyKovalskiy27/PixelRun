@@ -76,8 +76,12 @@ class UsersMusic:
                 return True
         return False
 
+
+
     def choose_random(self):
+        self.music_list = [s for s in self.music_list if os.path.exists(s.path)]
         enabled_songs = [s for s in self.music_list if s.is_enabled]
         if not enabled_songs:
             return settings.GAME_MUSIC_PATH
+
         return random.choice(enabled_songs).path
