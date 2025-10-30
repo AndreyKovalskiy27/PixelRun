@@ -8,8 +8,8 @@ class HowToPlayWindow(BaseWindow):
 
         self.title = Text((550, 0), "PIXEL TUTORIAL", 100, True)
         self.text = """Main game:
-You'll need to avoid pink triangles since
-they kill you instantly.
+Press A, W, D, Space and arrow keys to move
+You'll need to avoid pink triangles.
 Sniper enemy doesn't kill you but he shoots
 bullet and they can kill you.
 While running don't forget to collect yellow
@@ -23,9 +23,9 @@ You can also buy cool skins for your character!
 Settings:
 You can change music's and sound effects
 volume in settings.
-Also just for fun you can chose game
-difficulties! (Child, Normal, Hard, EXTREME).
-Higher difficulty = More coins!
+You can chose game difficulties (Higher
+difficulty = More coins)
+Also you can set you own music for the game!
 """
         self.text_rendered = Text((540, 130), self.text, 25)
         self.text1 = Text((0, 100), "How to play", 30, True)
