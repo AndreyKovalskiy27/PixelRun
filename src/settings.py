@@ -3,6 +3,13 @@
 
 import os
 from utils.storage.user_settings import UserSettings
+import os, sys
+
+
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 
 users_settings = UserSettings()
@@ -23,22 +30,22 @@ class GameParams:
 WINDOW_SIZE = (1800, 800)
 BACKGROUND_COLOR = (50, 50, 50)
 
-MENU_MUSIC_PATH = os.path.join("assets", "sounds", "Menu.mp3")
-GAME_MUSIC_PATH = os.path.join("assets", "sounds", "Game.mp3")
-SHOP_MUSIC_PATH  = os.path.join("assets", "sounds", "Shop.mp3")
+MENU_MUSIC_PATH = resource_path(os.path.join("assets", "sounds", "Menu.mp3"))
+GAME_MUSIC_PATH = resource_path(os.path.join("assets", "sounds", "Game.mp3"))
+SHOP_MUSIC_PATH = resource_path(os.path.join("assets", "sounds", "Shop.mp3"))
 
-SHIELD_IMAGE_PATH = os.path.join("assets", "images", "shield.png")
-COPYRIGHT_IMAGE_PATH = os.path.join("assets", "images", "copyright.png")
-SETTINGS_IMAGE_PATH = os.path.join("assets", "images", "settings.png")
-MUSIC_IMAGE_PATH = os.path.join("assets", "images", "music.png")
+SHIELD_IMAGE_PATH = resource_path(os.path.join("assets", "images", "shield.png"))
+COPYRIGHT_IMAGE_PATH = resource_path(os.path.join("assets", "images", "copyright.png"))
+SETTINGS_IMAGE_PATH = resource_path(os.path.join("assets", "images", "settings.png"))
+MUSIC_IMAGE_PATH = resource_path(os.path.join("assets", "images", "music.png"))
 
 MUSIC_VOLUME = users_settings.music_volume
 SOUND_EFFECTS_VOLUME = users_settings.sound_effects_volume
 
 BASE_FPS = 60 # 0 for the max FPS
 SLOW_DOWN_FPS = 30
-ICON_IMAGE_PATH = os.path.join("assets", "images", "icon.jpg")
-FONT_PATH = os.path.join("assets", "fonts", "GameFont.ttf")
+ICON_IMAGE_PATH = resource_path(os.path.join("assets", "images", "icon.jpg"))
+FONT_PATH = resource_path(os.path.join("assets", "fonts", "GameFont.ttf"))
 GROUND_LIMIT = WINDOW_SIZE[1]
 TEXT_COLOR = (255, 255, 255)
 LEVELS_ON_THE_SCREEN = 3
@@ -50,12 +57,12 @@ USERS_MUSIC_PATH =os.path.expanduser("~/.pixelmusic.json")
 MAX_SONGS = 5
 
 # Sound effects
-BUTTON_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "button.mp3")
-BUY_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "buy_sound.mp3")
-COIN_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "coin.mp3")
-JUMP_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "jump.mp3")
-DEATH_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "rip.mp3")
-ERROR_SOUND_EFFECT_PATH = os.path.join("assets", "sounds", "effects", "error.mp3")
+BUTTON_SOUND_EFFECT_PATH = resource_path(os.path.join("assets", "sounds", "effects", "button.mp3"))
+BUY_SOUND_EFFECT_PATH = resource_path(os.path.join("assets", "sounds", "effects", "buy_sound.mp3"))
+COIN_SOUND_EFFECT_PATH = resource_path(os.path.join("assets", "sounds", "effects", "coin.mp3"))
+JUMP_SOUND_EFFECT_PATH = resource_path(os.path.join("assets", "sounds", "effects", "jump.mp3"))
+DEATH_SOUND_EFFECT_PATH = resource_path(os.path.join("assets", "sounds", "effects", "rip.mp3"))
+ERROR_SOUND_EFFECT_PATH = resource_path(os.path.join("assets", "sounds", "effects", "error.mp3"))
 
 # Buttons
 BUTTON_COLOR = (30, 30, 30)
@@ -74,21 +81,21 @@ PLAYER_JUMP_STRENGHT = 30
 # Player animation
 PLAYER_ANIMATION_DELAY = 100
 PLAYER_START_ANIMATION_SPRITE = 0
-PLAYER_STANDING_SPIRTE_PATH = os.path.join("assets", "images", "player", "player_standing.PNG")
-PLAYER_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "player", "player_running.PNG")
-PLAYER_RUNNING2_SPTIRE_PATH = os.path.join("assets", "images", "player", "player_running2.PNG")
+PLAYER_STANDING_SPIRTE_PATH = resource_path(os.path.join("assets", "images", "player", "player_standing.PNG"))
+PLAYER_RUNNING_SPRITE_PATH = resource_path(os.path.join("assets", "images", "player", "player_running.PNG"))
+PLAYER_RUNNING2_SPTIRE_PATH = resource_path(os.path.join("assets", "images", "player", "player_running2.PNG"))
 
-ANGRY_MUNCI_STANDING_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_standing.PNG")
-ANGRY_MUNCI_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_running.PNG")
-ANGRY_MUNCI_RUNNING2_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_running2.PNG")
-ANGRY_MUNCI_RUNNING3_SPRITE_PATH = os.path.join("assets", "images", "angry_munci", "angry_munci_running3.PNG")
+ANGRY_MUNCI_STANDING_SPRITE_PATH = resource_path(os.path.join("assets", "images", "angry_munci", "angry_munci_standing.PNG"))
+ANGRY_MUNCI_RUNNING_SPRITE_PATH = resource_path(os.path.join("assets", "images", "angry_munci", "angry_munci_running.PNG"))
+ANGRY_MUNCI_RUNNING2_SPRITE_PATH = resource_path(os.path.join("assets", "images", "angry_munci", "angry_munci_running2.PNG"))
+ANGRY_MUNCI_RUNNING3_SPRITE_PATH = resource_path(os.path.join("assets", "images", "angry_munci", "angry_munci_running3.PNG"))
 
-CAT_JARD_STANDING_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_standing.PNG")
-CAT_JARD_RUNNING_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running.PNG")
-CAT_JARD_RUNNING2_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running2.PNG")
-CAT_JARD_RUNNING3_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running3.PNG")
-CAT_JARD_RUNNING4_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running4.PNG")
-CAT_JARD_RUNNING5_SPRITE_PATH = os.path.join("assets", "images", "cat_jard", "cat_jard_running5.PNG")
+CAT_JARD_STANDING_SPRITE_PATH = resource_path(os.path.join("assets", "images", "cat_jard", "cat_jard_standing.PNG"))
+CAT_JARD_RUNNING_SPRITE_PATH = resource_path(os.path.join("assets", "images", "cat_jard", "cat_jard_running.PNG"))
+CAT_JARD_RUNNING2_SPRITE_PATH = resource_path(os.path.join("assets", "images", "cat_jard", "cat_jard_running2.PNG"))
+CAT_JARD_RUNNING3_SPRITE_PATH = resource_path(os.path.join("assets", "images", "cat_jard", "cat_jard_running3.PNG"))
+CAT_JARD_RUNNING4_SPRITE_PATH = resource_path(os.path.join("assets", "images", "cat_jard", "cat_jard_running4.PNG"))
+CAT_JARD_RUNNING5_SPRITE_PATH = resource_path(os.path.join("assets", "images", "cat_jard", "cat_jard_running5.PNG"))
 
 # Enemies
 TRIANGLE_ENEMY_COLOR = (255, 0, 255)

@@ -1,6 +1,7 @@
 """Main games class"""
 
 
+import sys
 import settings
 import pygame
 from shop.shop_menu import ShopMenu
@@ -39,7 +40,8 @@ class Main:
             for event in events:
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    exit(0)
+                    sys.exit(0)
+
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         if self.game_type != "shop":
