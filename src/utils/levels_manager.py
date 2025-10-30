@@ -20,6 +20,7 @@ class LevelsManager:
                                  levels.Level_8,
                                  levels.Level_9,
                                  levels.Level_10]  # List of all available levels
+        # self.available_levels = [levels.TestLevel]
         self.active_levels = []  # Levels currently on the screen
         self.preload_count = settings.LEVELS_ON_THE_SCREEN  # Number of levels to keep ahead
 

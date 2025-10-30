@@ -31,6 +31,12 @@ class Level:
         return was_killed
 
 
+class TestLevel(Level):
+    def __init__(self):
+        super().__init__()
+        self.objects = [Platform((500, 500)),
+                        TriangleEnemy((500, 500))]
+
 class Level_1(Level):
     def __init__(self):
         super().__init__()
