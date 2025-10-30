@@ -6,9 +6,10 @@ from ui.button import Button
 from objects.player import Player
 from objects.shield import Shield
 from utils.levels_manager import LevelsManager
-from utils.sound import SoundEffects
+from utils.sound import SoundEffects, SoundTracks
 from utils.notifier import BaseNotifier
 from utils.message import Message
+from windows.pause_window import PauseWindow
 
 
 class GameNotifier(BaseNotifier):
@@ -28,12 +29,15 @@ class GameNotifier(BaseNotifier):
 
 class Game:
     def __init__(self, shop_util):
-        self.back_btn = Button((10, 10), "< (Press Enter)", button_size=(350, 50))
+        self.pause_btn = Button((10, 10), "Pause (Press Enter)", button_size=(350, 50))
         self.restart_btn = Button((400, 10), "Restart (Press R)", button_size=(350, 50))
         self.use_shield_btn = Button((800, 10), "Use shield (Press E)", button_size=(400, 50))
 
         self.notifier = GameNotifier()
+        self.pause_window = PauseWindow()
         self.shop_util = shop_util
+
+        self.is_paused = False
 
         self.create_game_objects()
 
@@ -54,6 +58,9 @@ class Game:
                 elif event.key == pygame.K_e:
                     self.use_shield()
 
+                elif event.key == pygame.K_RETURN:
+                    return "pause"
+
     def use_shield(self):
         if not self.shield.is_active:
             if self.shop_util.shields >= 1:
@@ -68,37 +75,80 @@ class Game:
             self.notifier.show("shield_is_active")
             SoundEffects.error()
 
+    def pause(self):
+        self.shield.timer.pause()
+        self.player_object.animation.timer.pause()
+        pygame.mixer.music.pause()
+        self.is_paused = True
+        self.pause_window.is_on = True
+
+    def resume(self):
+        self.shield.timer.resume()
+        self.player_object.animation.timer.resume()
+
+        # если сейчас в плеере уже игра (мы просто были на паузе) — unpause,
+        # иначе — явно переключаемся на игровой трек
+        if SoundTracks._get_instance().music_type == "game":
+            pygame.mixer.music.unpause()
+        else:
+            SoundTracks.game()
+
+        self.is_paused = False
+        self.pause_window.is_on = False
+
     def draw(self, screen, event):
-        # Moving objects
-        if self.player_object.keyboard_handler() == "jumped":
-            SoundEffects.jump()
+        if not self.pause_window.is_on:
+            # Moving objects
+            if self.player_object.keyboard_handler() == "jumped":
+                SoundEffects.jump()
 
-        self.player_object.apply_gravity()
-        self.player_object.move_with_background()
+            self.player_object.apply_gravity()
+            self.player_object.move_with_background()
 
-        res = self.levels_manager.update(self.player_object)
-        if res and not self.shield.is_active:
-            self.create_game_objects()
-            SoundEffects.death()
+            res = self.levels_manager.update(self.player_object)
+            if res and not self.shield.is_active:
+                self.create_game_objects()
+                SoundEffects.death()
+
+            if self.restart_btn.is_clicked(event):
+                self.create_game_objects()
+                self.notifier.show("game_restarted")
+
+            elif self.use_shield_btn.is_clicked(event):
+                self.use_shield()
+
 
         self.shield.draw(screen)
 
         # Drawing game objects
         self.player_object.draw(screen)
         self.levels_manager.draw(screen)
-        self.back_btn.draw(screen)
+        self.pause_btn.draw(screen)
         self.restart_btn.draw(screen)
         self.use_shield_btn.draw(screen)
         self.notifier.draw(screen)
-        self.keyboard_handler(event)
 
-        if self.back_btn.is_clicked(event):
-            self.shield.timer.pause()
+        res = self.pause_window.draw(screen, event)
+        if res == "mainmenu":
             return True
 
-        elif self.restart_btn.is_clicked(event):
-            self.create_game_objects()
-            self.notifier.show("game_restarted")
+        elif res == "continue":
+            self.resume()
 
-        elif self.use_shield_btn.is_clicked(event):
-            self.use_shield()
+        if self.keyboard_handler(event) == "pause":
+            self.pause_window.is_on = False if self.pause_window.is_on else True
+
+            if self.pause_window.is_on:
+                self.pause()
+
+            else:
+                self.resume()
+
+        if self.pause_btn.is_clicked(event):
+            self.pause_window.is_on = False if self.pause_window.is_on else True
+
+            if self.pause_window.is_on:
+                self.pause()
+
+            else:
+                self.resume()

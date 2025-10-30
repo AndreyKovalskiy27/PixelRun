@@ -51,18 +51,11 @@ class Main:
                     sys.exit(0)
 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
-                        if self.game_type != "shop":
-                            self.game_type = "game" if self.game_type == "mainmenu" else "mainmenu"
-                            self.game_menu.shield.timer.pause()
-                            if self.game_type == "game":
-                                self.game_menu.shield.timer.resume()
-
                     if event.key == pygame.K_TAB:
                         self.tab_menu.is_on = False if self.tab_menu.is_on else True
 
             if self.game_type != self.prev_game_type:
-                if self.game_type == "game":
+                if self.game_type == "game" and not self.game_menu.is_paused:
                     SoundTracks.game()
                 elif self.game_type == "shop":
                     SoundTracks.shop()
@@ -71,8 +64,7 @@ class Main:
                 self.prev_game_type = self.game_type
 
             if self.game_type == "game":
-                self.game_menu.shield.timer.resume()
-                if not pygame.mixer.music.get_busy():
+                if pygame.mixer.music.get_busy() and self.game_menu.is_paused:
                     SoundTracks.game()
 
                 if self.game_menu.draw(self.screen, events):
