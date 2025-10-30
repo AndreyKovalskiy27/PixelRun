@@ -11,23 +11,20 @@ from .game import Game
 
 
 class Main:
-    """Main game"""
     def __init__(self):
-        """Start game"""
         pygame.init()
         pygame.mixer.init()
         pygame.font.init()
-
         self.screen = pygame.display.set_mode(settings.WINDOW_SIZE)
         pygame.display.set_caption("Pixel run")
         icon = pygame.image.load(settings.ICON_IMAGE_PATH)
-        pygame.display.set_icon(icon)  # For some reason icon doesn't work on Windows
+        pygame.display.set_icon(icon)
 
         self.shop_util = ShopUtil()
         self.game_type = "mainmenu"
+        self.prev_game_type = None  # Для отслеживания смены режима
 
     def mainloop(self):
-        """Main loop of the game"""
         self.clock = pygame.time.Clock()
         self.main_menu = MainMenu()
         self.shop_menu = ShopMenu(self.shop_util)
@@ -38,38 +35,38 @@ class Main:
             pygame.display.update()
             self.screen.fill(settings.BACKGROUND_COLOR)
 
-            event = pygame.event.get()
-
-            for _ in event:
-                # Quit
-                if _.type == pygame.QUIT:
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     exit(0)
-
-                # Keys
-                if _.type == pygame.KEYDOWN:
-                    # Changing game modes
-                    if _.key == pygame.K_RETURN:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
                         if self.game_type != "shop":
                             self.game_type = "game" if self.game_type == "mainmenu" else "mainmenu"
                             self.game_menu.shield.timer.pause()
-
                             if self.game_type == "game":
                                 self.game_menu.shield.timer.resume()
 
+            # Проверка смены режима
+            if self.game_type != self.prev_game_type:
+                if self.game_type == "game":
+                    SoundTracks.game()
+                elif self.game_type == "shop":
+                    SoundTracks.shop()
+                elif self.game_type == "mainmenu":
+                    SoundTracks.main_menu()
+                self.prev_game_type = self.game_type
+
+            # Отрисовка
             if self.game_type == "game":
-                SoundTracks.game()
-                if self.game_menu.draw(self.screen, event):
+                if self.game_menu.draw(self.screen, events):
                     self.game_type = "mainmenu"
-
             elif self.game_type == "shop":
-                SoundTracks.shop()
-                res = self.shop_menu.draw(self.screen, event)
-                if res == True:
+                res = self.shop_menu.draw(self.screen, events)
+                if res:
                     self.game_type = "mainmenu"
-
             elif self.game_type == "mainmenu":
-                SoundTracks.main_menu()
-                res = self.main_menu.draw_main_menu(self.screen, event)
+                res = self.main_menu.draw_main_menu(self.screen, events)
                 if res:
                     self.game_type = res
