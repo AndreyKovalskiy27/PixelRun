@@ -13,6 +13,7 @@ class SoundTracks:
         self.positions = {}
         self.volume = settings.MUSIC_VOLUME
         self.users_music = UsersMusic()
+        self.music_type = None
         SoundTracks._instance = self
 
     @classmethod
@@ -20,7 +21,6 @@ class SoundTracks:
         if cls._instance is None:
             cls()
         return cls._instance
-
 
     @classmethod
     def play_music(cls, path):
@@ -37,21 +37,26 @@ class SoundTracks:
         pygame.mixer.music.stop()
         pygame.mixer.music.load(path)
         pygame.mixer.music.set_volume(volume)
-        pygame.mixer.music.play(-1, start=start_pos)
+        pygame.mixer.music.play(1 if inst.music_type == "game" else -1, start=start_pos)
         inst.current_music = path
 
     @classmethod
     def main_menu(cls):
+        inst = cls._get_instance()
+        inst.music_type = "mainmenu"
         cls.play_music(settings.MENU_MUSIC_PATH)
 
     @classmethod
     def shop(cls):
+        inst = cls._get_instance()
+        inst.music_type = "shop"
         cls.play_music(settings.SHOP_MUSIC_PATH)
 
     @classmethod
     def game(cls):
-        instance = cls._get_instance()
-        cls.play_music(instance.users_music.choose_random())
+        inst = cls._get_instance()
+        inst.music_type = "game"
+        cls.play_music(inst.users_music.choose_random())
 
 
 class SoundEffects:

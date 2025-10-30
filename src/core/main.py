@@ -48,7 +48,6 @@ class Main:
                             if self.game_type == "game":
                                 self.game_menu.shield.timer.resume()
 
-            # Проверка смены режима
             if self.game_type != self.prev_game_type:
                 if self.game_type == "game":
                     SoundTracks.game()
@@ -58,15 +57,22 @@ class Main:
                     SoundTracks.main_menu()
                 self.prev_game_type = self.game_type
 
-            # Отрисовка
+            # Проверяем только в режиме "игра"
             if self.game_type == "game":
+                # Если музыка закончилась — запускаем новую
+                if not pygame.mixer.music.get_busy():
+                    SoundTracks.game()
+
                 if self.game_menu.draw(self.screen, events):
                     self.game_type = "mainmenu"
+
             elif self.game_type == "shop":
+                SoundTracks.shop()
                 res = self.shop_menu.draw(self.screen, events)
                 if res:
                     self.game_type = "mainmenu"
             elif self.game_type == "mainmenu":
+                SoundTracks.main_menu()
                 res = self.main_menu.draw_main_menu(self.screen, events)
                 if res:
                     self.game_type = res
