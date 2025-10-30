@@ -60,6 +60,7 @@ class Main:
                 self.prev_game_type = self.game_type
 
             if self.game_type == "game":
+                self.game_menu.shield.timer.resume()
                 if not pygame.mixer.music.get_busy():
                     SoundTracks.game()
 
