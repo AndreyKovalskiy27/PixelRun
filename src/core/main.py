@@ -22,7 +22,7 @@ class Main:
 
         self.shop_util = ShopUtil()
         self.game_type = "mainmenu"
-        self.prev_game_type = None  # Для отслеживания смены режима
+        self.prev_game_type = None
 
     def mainloop(self):
         self.clock = pygame.time.Clock()
@@ -57,9 +57,7 @@ class Main:
                     SoundTracks.main_menu()
                 self.prev_game_type = self.game_type
 
-            # Проверяем только в режиме "игра"
             if self.game_type == "game":
-                # Если музыка закончилась — запускаем новую
                 if not pygame.mixer.music.get_busy():
                     SoundTracks.game()
 
