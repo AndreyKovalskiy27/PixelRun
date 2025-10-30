@@ -2,8 +2,7 @@ import os
 from .window import BaseWindow
 from ui.text import Text
 from ui.button import Button
-from utils.storage.users_music import UsersMusic
-from utils.sound import SoundTracks
+from utils.sound import SoundTracks,SoundEffects
 from utils.message import Message
 import tkinter as tk
 from tkinter import filedialog
@@ -86,5 +85,7 @@ class MusicWindow(BaseWindow):
                         self.draw_and_update_songs()
                     except ValueError:
                         self.message_to_much_songs.show()
+                        SoundEffects.error()
+
                     except FileNotFoundError:
                         print(f"File not found: {file}")

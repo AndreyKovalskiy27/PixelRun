@@ -31,7 +31,7 @@ class SoundTracks:
 
         start_pos = inst.positions.get(path, 0)
 
-        if inst.current_music == path:
+        if inst.current_music == path and inst.music_type != "game":
             return
 
         pygame.mixer.music.stop()

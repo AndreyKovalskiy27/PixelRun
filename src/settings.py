@@ -6,6 +6,7 @@ from utils.storage.user_settings import UserSettings
 import os, sys
 
 
+VERSION = "2.1.0 BETA"
 def resource_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, relative_path)
